@@ -6,13 +6,7 @@
       "use": "@vercel/node"
     }
   ],
-  "routes": [
-    {
-      "src": "/api/send-message",
-      "dest": "app.js"
-    },
-    
-  ],
+  
   "headers": [
     {
       "source": "/(.*)",
