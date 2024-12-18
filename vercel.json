@@ -8,6 +8,10 @@
   ],
   "routes": [
     {
+      "src": "/api/health",
+      "dest": "app.js"
+    },
+    {
       "src": "/(.*)",
       "dest": "app.js"
     }
@@ -18,7 +22,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self' https://vercel.live; script-src 'self' https://vercel.live; connect-src 'self' https://vercel.live;"
+          "value": "default-src 'self' https://vercel.live; script-src 'self' https://vercel.live; connect-src 'self' https://vercel.live; style-src 'self' 'unsafe-inline';"
         }
       ]
     }
