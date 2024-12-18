@@ -1,8 +1,12 @@
 import admin from 'firebase-admin';
 import { readFileSync } from 'fs';
+import path from 'path';
 
-// Load the service account key from the file system
-const serviceAccount = JSON.parse(readFileSync('./serviceAccountKey.json', 'utf-8'));
+// Path to the service account key stored in Render secrets
+const serviceAccountPath = '/etc/secrets/serviceAccountKey.json';
+
+// Read and parse the service account JSON file
+const serviceAccount = JSON.parse(readFileSync(serviceAccountPath, 'utf8'));
 
 
 admin.initializeApp({
