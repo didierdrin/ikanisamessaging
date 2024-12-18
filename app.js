@@ -30,7 +30,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
-      "https://seasoned-cuddly-success.glitch.me",
+      "https://ikanisamessaging.onrender.com",
     ],
     methods: ["GET", "POST"],
     credentials: true,
@@ -358,7 +358,7 @@ const handleOrder = async (message, changes, displayPhoneNumber) => {
 
   try {
     await axios.post(
-      `https://seasoned-cuddly-success.glitch.me/api/save-order`,
+      `https://ikanisamessaging.onrender.com/api/save-order`,
       {
         orderId,
         customerInfo,
