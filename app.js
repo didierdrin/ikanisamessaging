@@ -20,7 +20,7 @@ const httpsAgent = new https.Agent({
 });
 
 // Set longer timeout and more robust connection settings
-axios.defaults.timeout = 60000 * 3; // 30 seconds
+axios.defaults.timeout = 60000 * 3; // 3 minutes
 axios.defaults.httpAgent = httpAgent;
 axios.defaults.httpsAgent = httpsAgent;
 
