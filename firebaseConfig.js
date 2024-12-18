@@ -9,23 +9,17 @@ const serviceAccountPath = '/etc/secrets/serviceAccountKey.json';
 const serviceAccount = JSON.parse(readFileSync(serviceAccountPath, 'utf8'));
 
 
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: "https://icupa-396da.firebaseio.com"
-});
-
-//const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
-
-//if (!admin.apps.length) {
-//    try {
-//        admin.initializeApp({
-//            credential: admin.credential.cert(serviceAccount),
-//            databaseURL: "https://icupa-396da.firebaseio.com"
-//        });
-//    } catch (error) {
-//        console.error('Firebase Admin initialization error:', error);
-//    }
-//}
+if (!admin.apps.length) {
+    try {
+        admin.initializeApp({
+            credential: admin.credential.cert(serviceAccount),
+            databaseURL: "https://icupa-396da.firebaseio.com"
+        });
+        console.log('Firebase Admin successfully initialized!!!!!!!!!!!!!!!!!');
+    } catch (error) {
+        console.error('Firebase Admin initialization error:', error);
+    }
+}
 
 
 // Export the Firestore instance
