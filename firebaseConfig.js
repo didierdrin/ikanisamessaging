@@ -11,7 +11,7 @@ const serviceAccount = JSON.parse(readFileSync('./serviceAccountKey.json', 'utf-
 if (!admin.apps.length) {
     try {
         admin.initializeApp({
-            credential: admin.credential.cert(JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY)),
+            credential: admin.credential.cert(serviceAccount),
             databaseURL: "https://icupa-396da.firebaseio.com"
         });
     } catch (error) {
