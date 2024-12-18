@@ -9,15 +9,15 @@
   "routes": [
     {
       "src": "/api/send-message",
-      "dest": "app.js"
+      "dest": "/app.js"
     },
     {
       "src": "/api/health",
-      "dest": "app.js"
+      "dest": "/app.js"
     },
     {
       "src": "/(.*)",
-      "dest": "app.js"
+      "dest": "/app.js"
     }
   ],
   "headers": [
