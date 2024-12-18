@@ -6,18 +6,14 @@
       "use": "@vercel/node"
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/send-message",
-      "dest": "/app.js"
+      "source": "/api/send-message",
+      "destination": "/app.js"
     },
     {
-      "src": "/api/health",
-      "dest": "/app.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/app.js"
+      "source": "/api/health",
+      "destination": "/app.js"
     }
   ],
   "headers": [
@@ -26,7 +22,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self' https://vercel.live; script-src 'self' https://vercel.live; connect-src 'self' https://vercel.live; style-src 'self' 'unsafe-inline'; frame-src 'self';"
+          "value": "default-src 'self' https://vercel.live; script-src 'self' https://vercel.live; connect-src 'self' https://vercel.live; style-src 'self' 'unsafe-inline';"
         }
       ]
     }
