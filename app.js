@@ -279,11 +279,11 @@ const handleMobileMoneySelection = async (buttonId, phone) => {
 
   switch (buttonId) {
     case "mtn_momo":
-      callToActionMessage = `Please pay with\nMOMO to ${250788767816}, name Icupa`;
+      callToActionMessage = `Please pay with\nMOMO to ${250788767816}, name Icupa\n____________________\nYour order is being processed and will be delivered soon`;
       break;
 
     case "airtel_mobile_money":
-      callToActionMessage = `Please pay with\nAirtel to ${250788767816}, name Icupa`;
+      callToActionMessage = `Please pay with\nAirtel to ${250788767816}, name Icupa\n____________________\nYour order is being processed and will be delivered soon`;
       break;
 
     default:
