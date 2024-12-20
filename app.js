@@ -232,7 +232,7 @@ const handlePaymentTermsReply = async (replyId, phone, userContext) => {
       break;
     case "agree_to_terms":
       console.log("User agreed to the terms. Proceeding with payment.");
-      await processPayment(phone, userContext.selectedPaymentPlan);
+      await processPayment(phone, userContext.selectedInstallment);
       break;
 
     case "cancel_payment":
@@ -318,8 +318,12 @@ const handleNumberOfPeople = async (message, phone) => {
           numberOfPeople: numberOfPeople,
         });
 
+        // Calculate total cost
+        const coverageCost = userContext.selectedCoverage || 0;
+        userContext.totalCost = numberOfPeople * coverageCost;
+
         userContext.stage = null;
-        userContext.numberOfCoveredPeople = numberOfPeople;
+        //userContext.numberOfCoveredPeople = numberOfPeople;
         userContexts.set(phone, userContext);
 
         await selectPaymentPlan(phone);
@@ -434,18 +438,59 @@ const handleInteractiveMessages = async (message, phone) => {
       break;
 
     case "cat_1":
+      userContext.selectedCoverage = 1000000; // Price for CAT 1
+      userContexts.set(phone, userContext);
+      await numberOfCoveredPeople(phone);
+      break;
+
     case "cat_2":
+      userContext.selectedCoverage = 2000000; // Price for CAT 2
+      userContexts.set(phone, userContext);
+      await numberOfCoveredPeople(phone);
+      break;
+
     case "cat_3":
+      userContext.selectedCoverage = 3000000; // Price for CAT 3
+      userContexts.set(phone, userContext);
+      await numberOfCoveredPeople(phone);
+      break;
+
     case "cat_4":
+      userContext.selectedCoverage = 4000000; // Price for CAT 4
+      userContexts.set(phone, userContext);
+      await numberOfCoveredPeople(phone);
+      break;
+
     case "cat_5":
+      userContext.selectedCoverage = 5000000; // Price for CAT 5
+      userContexts.set(phone, userContext);
+      await numberOfCoveredPeople(phone);
+      break;
+
     case "risk_taker":
+      userContext.selectedCoverage = 0; // No cost for no coverage
+      userContexts.set(phone, userContext);
       await numberOfCoveredPeople(phone);
       break;
     case "installment_cat1":
+      userContext.selectedInstallment = 'i_cat1';
+      userContexts.set(phone); 
+      await confirmAndPay(phone); 
     case "installment_cat2":
+      userContext.selectedInstallment = 'i_cat2';
+      userContext.set(phone, userContext); 
+      await confirmAndPay(phone); 
     case "installment_cat3":
+      userContext.selectedInstallment = 'i_cat3'; 
+      userContext.set(phone, userContext); 
+      await confirmAndPay(phone); 
     case "installment_cat4":
+      userContext.selectedInstallment = 'i_cat4'; 
+      userContext.set(phone, userContext); 
+      await confirmAndPay(phone); 
     case "full_payment":
+      userContext.selectedInstallment = 'i_catf'; 
+      userContext.set(phone, userContext);
       await confirmAndPay(phone);
       break;
 
@@ -1315,9 +1360,32 @@ async function selectPaymentPlan(phone) {
 
 async function confirmAndPay(phone) {
   const userContext = userContexts.get(phone) || {};
-  // Set the context to expect number of people
-  userContext.stage = "EXPECTING_CONFIRM_PAY";
-  userContexts.set(phone, userContext);
+
+  const totalCost = userContext.totalCost || 0; 
+  const selectedInstallmentChoice = userContext.selectedInstallment || ""; 
+  
+
+  let installmentBreakdown = "";
+
+  switch (selectedInstallmentChoice) {
+    case "i_cat1":
+      installmentBreakdown = `${totalCost * 0.25}`;
+      break;
+    case "i_cat2":
+      installmentBreakdown = `${totalCost * 0.5}`;
+      break;
+    case "i_cat3":
+      installmentBreakdown = `${totalCost * 0.75}`;
+      break;
+    case "i_cat4":
+      installmentBreakdown = `${totalCost * 0.4}`;
+      break;
+    case "i_catf":
+      installmentBreakdown = `${totalCost}`;
+      break;
+    default:
+      installmentBreakdown = "Unknown payment plan.";
+  }
 
   const payload = {
     type: "interactive",
@@ -1331,7 +1399,7 @@ async function confirmAndPay(phone) {
         text: "Your selected option includes Admin fees, VAT, and SGF. Do you agree to proceed with the payment?",
       },
       footer: {
-        text: "FRW 100,000 will be charged.",
+        text: `Total: FRW ${installmentBreakdown} for this month`,
       },
       action: {
         buttons: [
@@ -1355,14 +1423,50 @@ async function confirmAndPay(phone) {
   };
 
   await sendWhatsAppMessage(phone, payload);
+  // Set the context to expect number of people
+  userContext.stage = "EXPECTING_CONFIRM_PAY";
+  userContexts.set(phone, userContext);
 }
 
 // Last message - get insurance
 async function processPayment(phone, paymentPlan) {
-  const paymentPayload = {
+    const userContext = userContexts.get(phone) || {};
+    const totalCost = userContext.totalCost || 0;
+  
+    let installmentBreakdown = "";
+  
+    switch (paymentPlan) {
+      case "i_cat1":
+        installmentBreakdown = `1M: ${totalCost * 0.25} FRW, 2M: ${
+          totalCost * 0.25
+        } FRW, 9M: ${totalCost * 0.5} FRW`;
+        break;
+      case "i_cat2":
+        installmentBreakdown = `3M: ${totalCost * 0.5} FRW, 9M: ${
+          totalCost * 0.5
+        } FRW`;
+        break;
+      case "i_cat3":
+        installmentBreakdown = `6M: ${totalCost * 0.75} FRW, 6M: ${
+          totalCost * 0.25
+        } FRW`;
+        break;
+      case "i_cat4":
+        installmentBreakdown = `1M: ${totalCost * 0.25} FRW, 3M: ${
+          totalCost * 0.35
+        } FRW, 8M: ${totalCost * 0.4} FRW`;
+        break;
+      case "i_catf":
+        installmentBreakdown = `Full payment: ${totalCost} FRW`;
+        break;
+      default:
+        installmentBreakdown = "Unknown payment plan.";
+    }
+  
+    const paymentPayload = {
     type: "text",
     text: {
-      body: `Your purchase for ${paymentPlan} is being processed after your payment is received, you will receive a confirmation shortly.`,
+      body: `Please pay with \nMoMo/Airtel to ${250788767816}\nName -> Ikanisa\n____________________\nYour purchase for ${installmentBreakdown} is being processed after your payment is received, you will receive a confirmation shortly.`,
     },
   };
 
