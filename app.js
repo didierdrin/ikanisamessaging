@@ -472,22 +472,31 @@ const handleInteractiveMessages = async (message, phone) => {
       userContexts.set(phone, userContext);
       await numberOfCoveredPeople(phone);
       break;
+
     case "installment_cat1":
       userContext.selectedInstallment = 'i_cat1';
-      userContexts.set(phone); 
+      userContexts.set(phone, userContext); 
       await confirmAndPay(phone); 
+      break;
+
     case "installment_cat2":
       userContext.selectedInstallment = 'i_cat2';
-      userContext.set(phone, userContext); 
+      userContexts.set(phone, userContext); 
       await confirmAndPay(phone); 
+      break; 
+
     case "installment_cat3":
       userContext.selectedInstallment = 'i_cat3'; 
-      userContext.set(phone, userContext); 
+      userContexts.set(phone, userContext); 
       await confirmAndPay(phone); 
+      break;
+
     case "installment_cat4":
       userContext.selectedInstallment = 'i_cat4'; 
       userContext.set(phone, userContext); 
       await confirmAndPay(phone); 
+      break; 
+      
     case "full_payment":
       userContext.selectedInstallment = 'i_catf'; 
       userContext.set(phone, userContext);
@@ -1361,8 +1370,8 @@ async function selectPaymentPlan(phone) {
 async function confirmAndPay(phone) {
   const userContext = userContexts.get(phone) || {};
 
-  const totalCost = userContext.totalCost || 0; 
-  const selectedInstallmentChoice = userContext.selectedInstallment || ""; 
+  const totalCost = userContext.totalCost || 0;  
+  const selectedInstallmentChoice = userContext.selectedInstallement || "";  
   
 
   let installmentBreakdown = "";
@@ -1384,7 +1393,7 @@ async function confirmAndPay(phone) {
       installmentBreakdown = `${totalCost}`;
       break;
     default:
-      installmentBreakdown = "Unknown payment plan.";
+      installmentBreakdown = "Unknown installment plan.";
   }
 
   const payload = {
