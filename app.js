@@ -1466,7 +1466,7 @@ async function processPayment(phone, paymentPlan) {
     const paymentPayload = {
     type: "text",
     text: {
-      body: `Please pay with \nMoMo/Airtel to ${250788767816}\nName -> Ikanisa\n____________________\nYour purchase for ${installmentBreakdown} is being processed after your payment is received, you will receive a confirmation shortly.`,
+      body: `Please pay with \nMoMo/Airtel to ${250788767816}\nName: Ikanisa\n_______________________\nYour purchase for ${installmentBreakdown} is being processed after your payment is received, you will receive a confirmation shortly.`,
     },
   };
 
