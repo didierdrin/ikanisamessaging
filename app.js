@@ -476,31 +476,31 @@ const handleInteractiveMessages = async (message, phone) => {
     case "installment_cat1":
       userContext.selectedInstallment = 'i_cat1';
       userContexts.set(phone, userContext); 
-      await confirmAndPay(phone); 
+      await confirmAndPay(phone, userContext.selectedInstallment); 
       break;
 
     case "installment_cat2":
       userContext.selectedInstallment = 'i_cat2';
       userContexts.set(phone, userContext); 
-      await confirmAndPay(phone); 
+      await confirmAndPay(phone, userContext.selectedInstallment); 
       break; 
 
     case "installment_cat3":
       userContext.selectedInstallment = 'i_cat3'; 
       userContexts.set(phone, userContext); 
-      await confirmAndPay(phone); 
+      await confirmAndPay(phone, userContext.selectedInstallment); 
       break;
 
     case "installment_cat4":
       userContext.selectedInstallment = 'i_cat4'; 
-      userContext.set(phone, userContext); 
-      await confirmAndPay(phone); 
+      userContexts.set(phone, userContext); 
+      await confirmAndPay(phone, userContext.selectedInstallment); 
       break; 
       
     case "full_payment":
       userContext.selectedInstallment = 'i_catf'; 
-      userContext.set(phone, userContext);
-      await confirmAndPay(phone);
+      userContexts.set(phone, userContext);
+      await confirmAndPay(phone, userContext.selectedInstallment);
       break;
 
     default:
@@ -1367,11 +1367,10 @@ async function selectPaymentPlan(phone) {
   await sendWhatsAppMessage(phone, payload);
 }
 
-async function confirmAndPay(phone) {
+async function confirmAndPay(phone, selectedInstallmentChoice) {
   const userContext = userContexts.get(phone) || {};
 
   const totalCost = userContext.totalCost || 0;  
-  const selectedInstallmentChoice = userContext.selectedInstallement || "";  
   
 
   let installmentBreakdown = "";
@@ -1446,27 +1445,19 @@ async function processPayment(phone, paymentPlan) {
   
     switch (paymentPlan) {
       case "i_cat1":
-        installmentBreakdown = `1M: ${totalCost * 0.25} FRW, 2M: ${
-          totalCost * 0.25
-        } FRW, 9M: ${totalCost * 0.5} FRW`;
+        installmentBreakdown = `1M: FRW ${totalCost * 0.25}`;
         break;
       case "i_cat2":
-        installmentBreakdown = `3M: ${totalCost * 0.5} FRW, 9M: ${
-          totalCost * 0.5
-        } FRW`;
+        installmentBreakdown = `3M: FRW ${totalCost * 0.5}`;
         break;
       case "i_cat3":
-        installmentBreakdown = `6M: ${totalCost * 0.75} FRW, 6M: ${
-          totalCost * 0.25
-        } FRW`;
+        installmentBreakdown = `6M: FRW ${totalCost * 0.75}`;
         break;
       case "i_cat4":
-        installmentBreakdown = `1M: ${totalCost * 0.25} FRW, 3M: ${
-          totalCost * 0.35
-        } FRW, 8M: ${totalCost * 0.4} FRW`;
+        installmentBreakdown = `8M: FRW ${totalCost * 0.4}`;
         break;
       case "i_catf":
-        installmentBreakdown = `Full payment: ${totalCost} FRW`;
+        installmentBreakdown = `Full payment: FRW ${totalCost}`;
         break;
       default:
         installmentBreakdown = "Unknown payment plan.";
