@@ -223,12 +223,15 @@ const handlePaymentTermsReply = async (replyId, phone, userContext) => {
 
       break;
     case "add_no":
-      if (userContext.stage === "PERSONAL_ACCIDENT_COVER") {
-        await numberOfCoveredPeople(phone);
-        console.log("Expecting Number of People button reply");
-        return;
-      }
+      // Calculate total cost
+      const coverageCost = userContext.selectedCoverage || 0;
+      userContext.totalCost = 1 * coverageCost;
 
+      userContext.stage = null;
+      //userContext.numberOfCoveredPeople = 1;
+      userContexts.set(phone, userContext);
+
+      await selectPaymentPlan(phone);
       break;
     case "agree_to_terms":
       console.log("User agreed to the terms. Proceeding with payment.");
