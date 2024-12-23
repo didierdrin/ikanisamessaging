@@ -172,6 +172,8 @@ const handleDateValidation = async (message, phone) => {
 
 // New comprehensive message handling functions
 const handleNFMReply = async (message, phone) => {
+  const userContext = userContexts.get(phone) || {};
+    
   try {
     // Safely parse the flow response
     const flowResponse = message.interactive.nfm_reply.response_json;
@@ -193,16 +195,18 @@ const handleNFMReply = async (message, phone) => {
 
     // Process specific cover type
     if (selectedCoverTypes.includes("0_Third-Party_Cover_")) {
+      userContext.thirdPartyComesaCost = 14000;
       await selectToAddPersonalAccidentCover(phone);
     }
 
     // Process specific cover type
     if (selectedCoverTypes.includes("1_COMESA_Cover")) {
+      userContext.thirdPartyComesaCost = 10000;
       await selectToAddPersonalAccidentCover(phone);
     }
 
     // Update user context
-    const userContext = userContexts.get(phone) || {};
+    //const userContext = userContexts.get(phone) || {};
     userContext.selectedCoverTypes = selectedCoverTypes;
     userContexts.set(phone, userContext);
   } catch (error) {
@@ -224,7 +228,8 @@ const handlePaymentTermsReply = async (replyId, phone, userContext) => {
       break;
     case "add_no":
       // Calculate total cost
-      const coverageCost = userContext.selectedCoverage || 0;
+      //const coverageCost = userContext.selectedCoverage || 0;
+      const coverageCost = userContext.thirdPartyComesaCost;
       userContext.totalCost = 1 * coverageCost;
 
       userContext.stage = null;
