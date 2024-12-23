@@ -1483,6 +1483,8 @@ async function processPayment(phone, paymentPlan) {
   // Simulate Payment
   await sendWhatsAppMessage(phone, paymentPayload);
   // Add logic to integrate with payment gateway API if needed.
+  console.log("______________________________________");
+  console.log("User context after all flows:", userContext);
 }
 
 // Start the server
