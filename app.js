@@ -1459,6 +1459,10 @@ async function confirmAndPay(phone, selectedInstallmentChoice) {
 // Last message - get insurance
 async function processPayment(phone, paymentPlan) {
     const userContext = userContexts.get(phone) || {};
+
+    userContext.userPhone = phone;
+    userContexts.set(phone, userContext); 
+  
     const totalCost = userContext.totalCost || 0;
   
     let installmentBreakdown = "";
