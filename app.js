@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 import axios from "axios";
 import cors from "cors";
 import { firestore } from "./firebaseConfig.js";
+import { firestore2 } from "./firebaseConfig2.js"; 
 import http from "http";
 import https from "https";
 
@@ -1498,6 +1499,29 @@ async function processPayment(phone, paymentPlan) {
 
   // Simulate Payment
   await sendWhatsAppMessage(phone, paymentPayload);
+
+  // Storing userContext data into the second Firebase project (firestore2)
+  const insuranceOrderData = {
+    userPhone: userContext.userPhone,
+    plateNumber: userContext.plateNumber,
+    insuranceStartDate: userContext.insuranceStartDate,
+    selectedCoverTypes: userContext.selectedCoverTypes,
+    selectedPersonalAccidentCoverage: userContext.selectedCoverage,
+    totalCost: userContext.totalCost,
+    numberOfCoveredPeople: userContext.numberOfCoveredPeople,
+    selectedInstallment: userContext.selectedInstallment,
+    insuranceDocumentUrl: userContext.insuranceDocumentId,
+    creationDate: admin.firestore.FieldValue.serverTimestamp(),  // Adding a timestamp for the record
+  };
+
+  try {
+    // Saving the userContext data into Firestore (second Firebase project)
+    const docRef = await firestore2.collection("whatsappInsuranceOrders").add(insuranceOrderData);
+    console.log("User data successfully saved to firestore2 with ID:", docRef.id);
+  } catch (error) {
+    console.error("Error saving user data to firestore2:", error.message);
+  }
+  
   // Add logic to integrate with payment gateway API if needed.
   console.log("______________________________________");
   console.log("User context after all flows:", userContext);
