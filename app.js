@@ -1504,15 +1504,15 @@ async function processPayment(phone, paymentPlan) {
 
   // Storing userContext data into the second Firebase project (firestore2)
   const insuranceOrderData = {
-    userPhone: String(userContext.userPhone),
-    plateNumber: String(userContext.plateNumber),
-    insuranceStartDate: String(userContext.insuranceStartDate),
-    selectedCoverTypes: String(userContext.selectedCoverTypes),
-    selectedPersonalAccidentCoverage: userContext.selectedCoverage,
-    totalCost: userContext.totalCost,
-    numberOfCoveredPeople: userContext.numberOfCoveredPeople,
-    selectedInstallment: String(userContext.selectedInstallment),
-    insuranceDocumentUrl: String(userContext.insuranceDocumentId),
+    userPhone: userContext.userPhone ? String(userContext.userPhone) : "",
+    plateNumber: userContext.plateNumber ? String(userContext.plateNumber) : "",
+    insuranceStartDate: userContext.insuranceStartDate ? String(userContext.insuranceStartDate) : "",
+    selectedCoverTypes: userContext.selectedCoverTypes ? String(userContext.selectedCoverTypes) : "",
+    selectedPersonalAccidentCoverage: userContext.selectedCoverage ? parseFloat(userContext.selectedCoverage) : 0.0,
+    totalCost: userContext.totalCost ? parseFloat(userContext.totalCost) : 0.0,
+    numberOfCoveredPeople: userContext.numberOfCoveredPeople ? parseFloat(userContext.numberOfCoveredPeople) : 0.0,
+    selectedInstallment: userContext.selectedInstallment ? String(userContext.selectedInstallment) : "",
+    insuranceDocumentUrl: userContext.insuranceDocumentId ? String(userContext.insuranceDocumentId) : "",
     creationDate: String(admin.firestore.FieldValue.serverTimestamp()),  // Adding a timestamp for the record
   };
 
