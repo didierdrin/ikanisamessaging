@@ -235,6 +235,7 @@ const handlePaymentTermsReply = async (replyId, phone, userContext) => {
     case "add_no":
       // Calculate total cost
       //const coverageCost = userContext.selectedCoverage || 0;
+      userContext.selectedCoverage = 0; // Price for CAT 0 None
       const coverageCost = userContext.thirdPartyComesaCost;
       userContext.totalCost = 1 * coverageCost;
 
