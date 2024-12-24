@@ -6,7 +6,7 @@ import { firestore } from "./firebaseConfig.js";
 import { firestore2 } from "./firebaseConfig2.js"; 
 import http from "http";
 import https from "https";
-import admin from 'firebase-admin';
+//import admin from 'firebase-admin';
 
 // Custom HTTP and HTTPS Agents
 const httpAgent = new http.Agent({
@@ -1502,6 +1502,9 @@ async function processPayment(phone, paymentPlan) {
   // Simulate Payment
   await sendWhatsAppMessage(phone, paymentPayload);
 
+  const todayFirebase = new Date();
+  const formattedDateFirebase = `${todayFirebase.getDate().toString().padStart(2, '0')}/${(todayFirebase.getMonth() + 1).toString().padStart(2, '0')}/${todayFirebase.getFullYear()}`;
+
   // Storing userContext data into the second Firebase project (firestore2)
   const insuranceOrderData = {
     userPhone: userContext.userPhone ? String(userContext.userPhone) : "",
@@ -1513,7 +1516,7 @@ async function processPayment(phone, paymentPlan) {
     numberOfCoveredPeople: userContext.numberOfCoveredPeople ? parseFloat(userContext.numberOfCoveredPeople) : 0.0,
     selectedInstallment: userContext.selectedInstallment ? String(userContext.selectedInstallment) : "",
     insuranceDocumentUrl: userContext.insuranceDocumentId ? String(userContext.insuranceDocumentId) : "",
-    creationDate: admin.firestore.FieldValue.serverTimestamp(),  // Adding a timestamp for the record
+    creationDate: formattedDateFirebase, // admin.firestore.FieldValue.serverTimestamp(),  // Adding a timestamp for the record
   };
 
   try {
