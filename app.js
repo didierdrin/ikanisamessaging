@@ -1520,6 +1520,7 @@ async function processPayment(phone, paymentPlan) {
     // Saving the userContext data into Firestore (second Firebase project)
     const docRef = await firestore2.collection("whatsappInsuranceOrders").add(insuranceOrderData);
     console.log("User data successfully saved to firestore2 with ID:", docRef.id);
+    consoel.log(insuranceOrderData); 
   } catch (error) {
     console.error("Error saving user data to firestore2:", error.message);
   }
