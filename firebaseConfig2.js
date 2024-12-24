@@ -13,7 +13,7 @@ if (!admin.apps.length) {
     try {
         admin.initializeApp({
             credential: admin.credential.cert(serviceAccount),
-            databaseURL: "https://assignrw.firebaseio.com"
+            //databaseURL: "https://assignrw.firebaseio.com"
         });
         console.log('Firebase Admin successfully initialized!!!!!!!!!!!!!!!!!');
     } catch (error) {
