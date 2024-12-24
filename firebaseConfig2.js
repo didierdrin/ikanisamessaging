@@ -23,4 +23,4 @@ if (!admin.apps.length) {
 
 
 // Export the Firestore instance
-export const firestore = admin.firestore();
+export const firestore2 = admin.firestore();
