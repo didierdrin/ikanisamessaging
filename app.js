@@ -1513,7 +1513,7 @@ async function processPayment(phone, paymentPlan) {
     numberOfCoveredPeople: userContext.numberOfCoveredPeople ? parseFloat(userContext.numberOfCoveredPeople) : 0.0,
     selectedInstallment: userContext.selectedInstallment ? String(userContext.selectedInstallment) : "",
     insuranceDocumentUrl: userContext.insuranceDocumentId ? String(userContext.insuranceDocumentId) : "",
-    creationDate: "23/03/2027",//String(admin.firestore.FieldValue.serverTimestamp()),  // Adding a timestamp for the record
+    creationDate: admin.firestore.FieldValue.serverTimestamp(),  // Adding a timestamp for the record
   };
 
   try {
