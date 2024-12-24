@@ -145,6 +145,11 @@ const handleDateValidation = async (message, phone) => {
           formattedDate: messageText,
         });
 
+        // Store the insurance start date in userContext
+        const userContext = userContexts.get(phone) || {};
+        userContext.insuranceStartDate = inputDate;
+        userContexts.set(phone, userContext);
+
         // Proceed to next step: selecting insurance cover type
         await selectInsuranceCoverType(phone);
       } else {
@@ -254,6 +259,11 @@ const handlePaymentTermsReply = async (replyId, phone, userContext) => {
       break;
     case "start_today":
       if (userContext.stage === "EXPECTING_INSURANCE_PERIOD") {
+        // Store the insurance start date in userContext
+        const today = new Date();
+        const formattedDate = `${today.getDate().toString().padStart(2, '0')}/${(today.getMonth() + 1).toString().padStart(2, '0')}/${today.getFullYear()}`;
+        userContext.insuranceStartDate = formattedDate;
+        userContexts.set(phone, userContext);
         await selectInsuranceCoverType(phone);
         console.log("Expecting start_today button reply");
         return;
@@ -331,7 +341,7 @@ const handleNumberOfPeople = async (message, phone) => {
         userContext.totalCost = numberOfPeople * coverageCost;
 
         userContext.stage = null;
-        //userContext.numberOfCoveredPeople = numberOfPeople;
+        userContext.numberOfCoveredPeople = numberOfPeople;
         userContexts.set(phone, userContext);
 
         await selectPaymentPlan(phone);
@@ -618,8 +628,10 @@ const handleDocumentUpload = async (message, phone) => {
     // Optional: Save document logic can be added here
     // await saveDocument(mediaId, mediaMimeType);
 
-    // Clear the expecting document stage
-    userContext.stage = null;
+
+    // Store the document ID (or URL if you download it) in the userContext
+    userContext.insuranceDocumentId = mediaId;
+    userContext.stage = null; // Clear the expecting document stage
     userContexts.set(phone, userContext);
 
     // Proceed to next step
