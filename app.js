@@ -1504,16 +1504,16 @@ async function processPayment(phone, paymentPlan) {
 
   // Storing userContext data into the second Firebase project (firestore2)
   const insuranceOrderData = {
-    userPhone: userContext.userPhone,
-    plateNumber: userContext.plateNumber,
-    insuranceStartDate: userContext.insuranceStartDate,
-    selectedCoverTypes: userContext.selectedCoverTypes,
+    userPhone: String(userContext.userPhone),
+    plateNumber: String(userContext.plateNumber),
+    insuranceStartDate: String(userContext.insuranceStartDate),
+    selectedCoverTypes: String(userContext.selectedCoverTypes),
     selectedPersonalAccidentCoverage: userContext.selectedCoverage,
     totalCost: userContext.totalCost,
     numberOfCoveredPeople: userContext.numberOfCoveredPeople,
-    selectedInstallment: userContext.selectedInstallment,
-    insuranceDocumentUrl: userContext.insuranceDocumentId,
-    creationDate: admin.firestore.FieldValue.serverTimestamp(),  // Adding a timestamp for the record
+    selectedInstallment: String(userContext.selectedInstallment),
+    insuranceDocumentUrl: String(userContext.insuranceDocumentId),
+    creationDate: String(admin.firestore.FieldValue.serverTimestamp()),  // Adding a timestamp for the record
   };
 
   try {
