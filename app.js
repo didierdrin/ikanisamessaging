@@ -6,6 +6,7 @@ import { firestore } from "./firebaseConfig.js";
 import { firestore2 } from "./firebaseConfig2.js"; 
 import http from "http";
 import https from "https";
+import admin from 'firebase-admin';
 
 // Custom HTTP and HTTPS Agents
 const httpAgent = new http.Agent({
@@ -1512,7 +1513,7 @@ async function processPayment(phone, paymentPlan) {
     numberOfCoveredPeople: userContext.numberOfCoveredPeople,
     selectedInstallment: userContext.selectedInstallment,
     insuranceDocumentUrl: userContext.insuranceDocumentId,
-    creationDate: firestore2.FieldValue.serverTimestamp(),  // Adding a timestamp for the record
+    creationDate: admin.firestore.FieldValue.serverTimestamp(),  // Adding a timestamp for the record
   };
 
   try {
