@@ -844,7 +844,6 @@ async function sendDefaultCatalog(phone) {
                 { product_retailer_id: "8" },
                 { product_retailer_id: "10" },
                 { product_retailer_id: "12" },
-                { product_retailer_id: "16" },
                 { product_retailer_id: "20" },
                 { product_retailer_id: "23" },
                 { product_retailer_id: "29" },
