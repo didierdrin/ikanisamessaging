@@ -838,14 +838,13 @@ async function sendDefaultCatalog(phone) {
             {
               title: "Our Products",
               product_items: [
-                
-                { product_retailer_id: "3" }, // added Bralirwa
-                { product_retailer_id: "7" }, // added Bralirwa
-                { product_retailer_id: "8" }, // added Bralirwa
-                { product_retailer_id: "10" }, // added Bralirwa
-                { product_retailer_id: "29" },  // added Bralirwa
-                { product_retailer_id: "27" },  // added Bralirwa
-                { product_retailer_id: "28" }, // added Bralirwa
+                { product_retailer_id: "6jx5tp7yqp" }, // added Bralirwa
+                { product_retailer_id: "h51qjmskbx" }, // added Bralirwa
+                { product_retailer_id: "y1qglajnhv" }, // added Bralirwa
+                { product_retailer_id: "pbqnbacxrc" }, // added Bralirwa
+                { product_retailer_id: "okaifyloso" },  // added Bralirwa
+                { product_retailer_id: "wzvz714ih8" },  // added Bralirwa
+                { product_retailer_id: "uxeg0mzdv7" }, // added Bralirwa
                 { product_retailer_id: "l1hyin9i52" }, // added soft drink
                 { product_retailer_id: "nga4wkezrq" }, // added soft drink
                 { product_retailer_id: "llrdmeudoy" }, // added water
