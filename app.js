@@ -845,20 +845,21 @@ async function sendDefaultCatalog(phone) {
                 { product_retailer_id: "okaifyloso" },  // added Bralirwa
                 { product_retailer_id: "wzvz714ih8" },  // added Bralirwa
                 { product_retailer_id: "uxeg0mzdv7" }, // added Bralirwa
+                { product_retailer_id: "hal9dbe85j" }, // added beer
+                { product_retailer_id: "qmjc9xln9n" }, // added beer
+                { product_retailer_id: "k3mzvkjbop" }, // added beer
+                { product_retailer_id: "sd4answ073" }, // added beer primus
+                { product_retailer_id: "hb5bkl8y3c" },  // added beer // to here
+                { product_retailer_id: "gpkcg34ube" }, // added beer
+                { product_retailer_id: "392tn02rkm" }, // added Beer Primus
+                { product_retailer_id: "snfun9b4kj" }, // added beer
+                { product_retailer_id: "q4dsuhh93f" }, // added beer 
                 { product_retailer_id: "l1hyin9i52" }, // added soft drink
                 { product_retailer_id: "nga4wkezrq" }, // added soft drink
                 { product_retailer_id: "5ndcwpxef9" }, // added soft drink
                 { product_retailer_id: "llrdmeudoy" }, // added water
                 { product_retailer_id: "6lzy4if9eg" }, // added soft drink
-                { product_retailer_id: "hal9dbe85j" }, // added beer
-                { product_retailer_id: "qmjc9xln9n" }, // added beer
-                { product_retailer_id: "k3mzvkjbop" }, // added beer
-                { product_retailer_id: "sd4answ073" }, // added beer primus
-                { product_retailer_id: "hb5bkl8y3c" },  // added beer
-                { product_retailer_id: "gpkcg34ube" }, // added beer
-                { product_retailer_id: "392tn02rkm" }, // added Beer Primus
-                { product_retailer_id: "snfun9b4kj" }, // added beer
-                { product_retailer_id: "q4dsuhh93f" }, // added beer
+                
               ],
             },
           ],
