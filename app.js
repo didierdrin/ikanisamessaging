@@ -853,12 +853,12 @@ async function sendDefaultCatalog(phone) {
                 { product_retailer_id: "2" }, // added beer
                 { product_retailer_id: "4" }, // added beer
                 { product_retailer_id: "14" }, // added beer
-                { product_retailer_id: "12" }, // added beer primus
-                { product_retailer_id: "5" },  // added beer
+                { product_retailer_id: "sd4answ073" }, // added beer primus
+                { product_retailer_id: "hb5bkl8y3c" },  // added beer
                 { product_retailer_id: "26" }, // added beer
-                { product_retailer_id: "25" }, // added Beer Primus
+                { product_retailer_id: "392tn02rkm" }, // added Beer Primus
                 { product_retailer_id: "22" }, // added beer
-                { product_retailer_id: "11" }, // added beer
+                { product_retailer_id: "q4dsuhh93f" }, // added beer
               ],
             },
           ],
