@@ -838,30 +838,27 @@ async function sendDefaultCatalog(phone) {
             {
               title: "Our Products",
               product_items: [
-                { product_retailer_id: "vwcj3tvbe2" },
-                { product_retailer_id: "3" },
-                { product_retailer_id: "7" },
-                { product_retailer_id: "8" },
-                { product_retailer_id: "10" },
-                { product_retailer_id: "12" },
-                { product_retailer_id: "20" },
-                { product_retailer_id: "23" },
-                { product_retailer_id: "29" },
-                { product_retailer_id: "25" },
-                { product_retailer_id: "27" },
-                { product_retailer_id: "28" },
-                { product_retailer_id: "l1hyin9i52" },
-                { product_retailer_id: "nga4wkezrq" },
-                { product_retailer_id: "5ndcwpxef9" },
-                { product_retailer_id: "llrdmeudoy" },
-                { product_retailer_id: "6lzy4if9eg" },
-                { product_retailer_id: "2" },
-                { product_retailer_id: "4" },
-                { product_retailer_id: "14" },
-                { product_retailer_id: "5" },
-                { product_retailer_id: "26" },
-                { product_retailer_id: "22" },
-                { product_retailer_id: "11" },
+                
+                { product_retailer_id: "3" }, // added Bralirwa
+                { product_retailer_id: "7" }, // added Bralirwa
+                { product_retailer_id: "8" }, // added Bralirwa
+                { product_retailer_id: "10" }, // added Bralirwa
+                { product_retailer_id: "29" },  // added Bralirwa
+                { product_retailer_id: "27" },  // added Bralirwa
+                { product_retailer_id: "28" }, // added Bralirwa
+                { product_retailer_id: "l1hyin9i52" }, // added soft drink
+                { product_retailer_id: "nga4wkezrq" }, // added soft drink
+                { product_retailer_id: "llrdmeudoy" }, // added water
+                { product_retailer_id: "6lzy4if9eg" }, // added soft drink
+                { product_retailer_id: "2" }, // added beer
+                { product_retailer_id: "4" }, // added beer
+                { product_retailer_id: "14" }, // added beer
+                { product_retailer_id: "12" }, // added beer primus
+                { product_retailer_id: "5" },  // added beer
+                { product_retailer_id: "26" }, // added beer
+                { product_retailer_id: "25" }, // added Beer Primus
+                { product_retailer_id: "22" }, // added beer
+                { product_retailer_id: "11" }, // added beer
               ],
             },
           ],
