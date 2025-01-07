@@ -839,6 +839,10 @@ async function sendDefaultCatalog(phone) {
             {
               title: "Our Products",
               product_items: [
+                                { product_retailer_id: "h4xmmo1ety" },
+                                { product_retailer_id: "zhu1lut550" },
+                                { product_retailer_id: "f1l30yprte" },
+                                { product_retailer_id: "y6ydhsj1cs" },
                                 { product_retailer_id: "6jx5tp7yqp" }, // carbonated drinks
                                 { product_retailer_id: "h51qjmskbx" },
                                 { product_retailer_id: "y1qglajnhv" },
@@ -847,10 +851,6 @@ async function sendDefaultCatalog(phone) {
                                 { product_retailer_id: "wzvz714ih8" },
                                 { product_retailer_id: "uxeg0mzdv7" }, 
                                 { product_retailer_id: "re4zoqg95f" }, // beers
-                                { product_retailer_id: "h4xmmo1ety" },
-                                { product_retailer_id: "zhu1lut550" },
-                                { product_retailer_id: "f1l30yprte" },
-                                { product_retailer_id: "y6ydhsj1cs" },
                                 { product_retailer_id: "08gro8egrt" },
                                 { product_retailer_id: "gpkcg34ube" },
                 
