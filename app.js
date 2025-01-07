@@ -867,8 +867,8 @@ async function sendDefaultCatalog(phone) {
                                 { product_retailer_id: "gpkcg34ube" },
                                 { product_retailer_id: "f1l30yprte" },
                                 { product_retailer_id: "rsr1ylb59u" },
-                           //     { product_retailer_id: "qhsw5jx85f" },
-                            //    { product_retailer_id: "rsl29fpztb" }
+                                { product_retailer_id: "7att19g5jx" },
+                                { product_retailer_id: "9228pxmhie" }
                             ]
                         },
                        // {
