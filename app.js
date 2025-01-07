@@ -846,11 +846,11 @@ async function sendDefaultCatalog(phone) {
                                 { product_retailer_id: "okaifyloso" },
                                 { product_retailer_id: "wzvz714ih8" },
                                 { product_retailer_id: "uxeg0mzdv7" }, 
-                                { product_retailer_id: "f1l30yprte" }, // beers
-                                { product_retailer_id: "rsr1ylb59u" },
-                                { product_retailer_id: "7att19g5jx" },
-                                { product_retailer_id: "9228pxmhie" },
-                                { product_retailer_id: "pxr5cj18u7" },
+                                { product_retailer_id: "re4zoqg95f" }, // beers
+                                { product_retailer_id: "h4xmmo1ety" },
+                                { product_retailer_id: "zhu1lut550" },
+                                { product_retailer_id: "f1l30yprte" },
+                                { product_retailer_id: "y6ydhsj1cs" },
                                 { product_retailer_id: "08gro8egrt" },
                                 { product_retailer_id: "gpkcg34ube" },
                 
