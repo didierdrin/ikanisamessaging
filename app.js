@@ -854,32 +854,33 @@ async function sendDefaultCatalog(phone) {
                                 { product_retailer_id: "okaifyloso" },
                                 { product_retailer_id: "wzvz714ih8" },
                                 { product_retailer_id: "uxeg0mzdv7" },
-                                { product_retailer_id: "vl5psbhdyu" },
-                                { product_retailer_id: "jsbisgfh2s" },
+                             //   { product_retailer_id: "vl5psbhdyu" },
+                             //   { product_retailer_id: "jsbisgfh2s" },
                                 
                             ]
                         },
                         {
                             title: "More Beers",
                             product_items: [
-                                { product_retailer_id: "6112shfwzj" },
-                                { product_retailer_id: "xwmze396yj" },
+                                { product_retailer_id: "nps80shj0n" },
+                                { product_retailer_id: "08gro8egrt" },
                                 { product_retailer_id: "gpkcg34ube" },
-                                { product_retailer_id: "uhgfs0f7qk" },
-                                { product_retailer_id: "qhsw5jx85f" },
-                                { product_retailer_id: "rsl29fpztb" }
+                                { product_retailer_id: "09v9olke3a" },
+                                { product_retailer_id: "ykqzuzqhtr" },
+                           //     { product_retailer_id: "qhsw5jx85f" },
+                            //    { product_retailer_id: "rsl29fpztb" }
                             ]
                         },
-                        {
-                            title: "Soft Drinks & Water",
-                            product_items: [
-                                { product_retailer_id: "l1hyin9i52" },
-                                { product_retailer_id: "nga4wkezrq" },
-                                { product_retailer_id: "5ndcwpxef9" },
-                                { product_retailer_id: "llrdmeudoy" },
-                                { product_retailer_id: "6lzy4if9eg" }
-                            ]
-                        }
+                       // {
+                           // title: "Soft Drinks & Water",
+                           // product_items: [
+                             //   { product_retailer_id: "l1hyin9i52" },
+                            //    { product_retailer_id: "nga4wkezrq" },
+                           //     { product_retailer_id: "5ndcwpxef9" },
+                          //      { product_retailer_id: "llrdmeudoy" },
+                         //       { product_retailer_id: "6lzy4if9eg" }
+                        //    ]
+                       // }
                     ]
                 }
             }
