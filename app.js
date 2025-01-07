@@ -862,11 +862,11 @@ async function sendDefaultCatalog(phone) {
                         {
                             title: "Beers",
                             product_items: [
-                                { product_retailer_id: "nps80shj0n" },
+                                { product_retailer_id: "0wj2933xch" },
                                 { product_retailer_id: "08gro8egrt" },
                                 { product_retailer_id: "gpkcg34ube" },
-                                { product_retailer_id: "09v9olke3a" },
-                                { product_retailer_id: "ykqzuzqhtr" },
+                                { product_retailer_id: "771obuewg4" },
+                                { product_retailer_id: "4s7wkj13b2" },
                            //     { product_retailer_id: "qhsw5jx85f" },
                             //    { product_retailer_id: "rsl29fpztb" }
                             ]
