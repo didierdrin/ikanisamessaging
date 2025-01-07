@@ -837,7 +837,7 @@ async function sendDefaultCatalog(phone) {
           catalog_id: "545943538321713",
           sections: [
             {
-              title: "Our Products - Soft drinks",
+              title: "Our Products",
               product_items: [
                 { product_retailer_id: "6jx5tp7yqp" }, // Bralirwa
                 { product_retailer_id: "h51qjmskbx" }, // Bralirwa
@@ -852,7 +852,7 @@ async function sendDefaultCatalog(phone) {
               ],
             },
             {
-              title: "Our Products - Fermented drinks",
+              title: "Fermented drinks",
               product_items: [
                 { product_retailer_id: "sd4answ073" },  // Beer Primus
                 { product_retailer_id: "hb5bkl8y3c" },  // Beer
