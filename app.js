@@ -844,7 +844,7 @@ async function sendDefaultCatalog(phone) {
                     catalog_id: "545943538321713",
                     sections: [
                         {
-                            title: "Beers",
+                            title: "Carbonated drinks",
                             product_items: [
                                 { product_retailer_id: "6jx5tp7yqp" },
                                 { product_retailer_id: "h51qjmskbx" },
@@ -853,20 +853,20 @@ async function sendDefaultCatalog(phone) {
                                 { product_retailer_id: "okaifyloso" },
                                 { product_retailer_id: "wzvz714ih8" },
                                 { product_retailer_id: "uxeg0mzdv7" },
-                                { product_retailer_id: "hal9dbe85j" },
-                                { product_retailer_id: "qmjc9xln9n" },
-                                { product_retailer_id: "k3mzvkjbop" }
+                                { product_retailer_id: "vl5psbhdyu" },
+                                { product_retailer_id: "jsbisgfh2s" },
+                                
                             ]
                         },
                         {
                             title: "More Beers",
                             product_items: [
-                                { product_retailer_id: "sd4answ073" },
-                                { product_retailer_id: "hb5bkl8y3c" },
+                                { product_retailer_id: "6112shfwzj" },
+                                { product_retailer_id: "xwmze396yj" },
                                 { product_retailer_id: "gpkcg34ube" },
-                                { product_retailer_id: "392tn02rkm" },
-                                { product_retailer_id: "snfun9b4kj" },
-                                { product_retailer_id: "q4dsuhh93f" }
+                                { product_retailer_id: "uhgfs0f7qk" },
+                                { product_retailer_id: "qhsw5jx85f" },
+                                { product_retailer_id: "rsl29fpztb" }
                             ]
                         },
                         {
