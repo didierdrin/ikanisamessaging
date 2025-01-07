@@ -819,77 +819,90 @@ async function sendWhatsAppMessage(phone, messagePayload) {
 
 // new catalog with sections
 async function sendDefaultCatalog(phone) {
-  try {
-    const url = `https://graph.facebook.com/${VERSION}/${PHONE_NUMBER_ID}/messages`;
+    try {
+        // WhatsApp has a limit of 30 products per section
+        // But only shows 10 products by default in product_list
+        const MAX_VISIBLE_PRODUCTS = 10;
+        
+        const url = `https://graph.facebook.com/${VERSION}/${PHONE_NUMBER_ID}/messages`;
+        
+        // Split products into categories to work within limitations
+        const payload = {
+            messaging_product: "whatsapp",
+            to: phone,
+            type: "interactive",
+            interactive: {
+                type: "product_list",
+                header: {
+                    type: "text",
+                    text: "Icupa Menu",
+                },
+                body: {
+                    text: "Order drinks directly & get free delivery!"
+                },
+                action: {
+                    catalog_id: "545943538321713",
+                    sections: [
+                        {
+                            title: "Beers",
+                            product_items: [
+                                { product_retailer_id: "6jx5tp7yqp" },
+                                { product_retailer_id: "h51qjmskbx" },
+                                { product_retailer_id: "y1qglajnhv" },
+                                { product_retailer_id: "pbqnbacxrc" },
+                                { product_retailer_id: "okaifyloso" },
+                                { product_retailer_id: "wzvz714ih8" },
+                                { product_retailer_id: "uxeg0mzdv7" },
+                                { product_retailer_id: "hal9dbe85j" },
+                                { product_retailer_id: "qmjc9xln9n" },
+                                { product_retailer_id: "k3mzvkjbop" }
+                            ]
+                        },
+                        {
+                            title: "More Beers",
+                            product_items: [
+                                { product_retailer_id: "sd4answ073" },
+                                { product_retailer_id: "hb5bkl8y3c" },
+                                { product_retailer_id: "gpkcg34ube" },
+                                { product_retailer_id: "392tn02rkm" },
+                                { product_retailer_id: "snfun9b4kj" },
+                                { product_retailer_id: "q4dsuhh93f" }
+                            ]
+                        },
+                        {
+                            title: "Soft Drinks & Water",
+                            product_items: [
+                                { product_retailer_id: "l1hyin9i52" },
+                                { product_retailer_id: "nga4wkezrq" },
+                                { product_retailer_id: "5ndcwpxef9" },
+                                { product_retailer_id: "llrdmeudoy" },
+                                { product_retailer_id: "6lzy4if9eg" }
+                            ]
+                        }
+                    ]
+                }
+            }
+        };
 
-    const payload = {
-      messaging_product: "whatsapp",
-      to: phone,
-      type: "interactive",
-      interactive: {
-        type: "product_list",
-        header: {
-          type: "text",
-          text: "Icupa Menu",
-        },
-        body: { text: "Order drinks directly & get free delivery!" },
-        action: {
-          catalog_id: "545943538321713",
-          sections: [
-            {
-              title: "Our Products",
-              product_items: [
-                { product_retailer_id: "6jx5tp7yqp" }, // Bralirwa
-                { product_retailer_id: "h51qjmskbx" }, // Bralirwa
-                { product_retailer_id: "y1qglajnhv" }, // Bralirwa
-                { product_retailer_id: "pbqnbacxrc" }, // Bralirwa
-                { product_retailer_id: "okaifyloso" },  // Bralirwa
-                { product_retailer_id: "wzvz714ih8" },  // Bralirwa
-                { product_retailer_id: "uxeg0mzdv7" },  // Bralirwa
-                { product_retailer_id: "hal9dbe85j" },  // beer
-                { product_retailer_id: "qmjc9xln9n" },  // beer
-                { product_retailer_id: "k3mzvkjbop" },  // beer
-              ],
+        const response = await axios({
+            method: "POST",
+            url: url,
+            headers: {
+                Authorization: `Bearer ${ACCESS_TOKEN}`,
+                "Content-Type": "application/json",
             },
-            {
-              title: "Fermented drinks",
-              product_items: [
-                { product_retailer_id: "sd4answ073" },  // Beer Primus
-                { product_retailer_id: "hb5bkl8y3c" },  // Beer
-                { product_retailer_id: "gpkcg34ube" },  // Beer
-                { product_retailer_id: "392tn02rkm" },  // Beer Primus
-                { product_retailer_id: "snfun9b4kj" },  // Beer
-                { product_retailer_id: "q4dsuhh93f" },  // Beer
-                { product_retailer_id: "l1hyin9i52" },  // Soft drink
-                { product_retailer_id: "nga4wkezrq" },  // Soft drink
-                { product_retailer_id: "5ndcwpxef9" },  // Soft drink
-                { product_retailer_id: "llrdmeudoy" },  // Water
-              ],
-            },
-          ],
-        },
-      },
-    };
+            data: payload,
+        });
 
-    const response = await axios({
-      method: "POST",
-      url: url,
-      headers: {
-        Authorization: `Bearer ${ACCESS_TOKEN}`,
-        "Content-Type": "application/json",
-      },
-      data: payload,
-    });
-
-    console.log("Default catalog sent successfully to:", phone);
-    return response.data;
-  } catch (error) {
-    console.error(
-      "Error sending default catalog:",
-      error.response?.data || error.message
-    );
-    throw error;
-  }
+        console.log("Default catalog sent successfully to:", phone);
+        return response.data;
+    } catch (error) {
+        console.error(
+            "Error sending default catalog:",
+            error.response?.data || error.message
+        );
+        throw error;
+    }
 }
 
 
