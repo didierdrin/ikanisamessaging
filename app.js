@@ -862,13 +862,14 @@ async function sendDefaultCatalog(phone) {
                         {
                             title: "Beers",
                             product_items: [
-                                { product_retailer_id: "0wj2933xch" },
-                                { product_retailer_id: "08gro8egrt" },
-                                { product_retailer_id: "gpkcg34ube" },
                                 { product_retailer_id: "f1l30yprte" },
                                 { product_retailer_id: "rsr1ylb59u" },
                                 { product_retailer_id: "7att19g5jx" },
-                                { product_retailer_id: "9228pxmhie" }
+                                { product_retailer_id: "9228pxmhie" },
+                                { product_retailer_id: "0wj2933xch" },
+                                { product_retailer_id: "08gro8egrt" },
+                                { product_retailer_id: "gpkcg34ube" },
+                                
                             ]
                         },
                        // {
