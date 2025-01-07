@@ -822,25 +822,6 @@ async function sendDefaultCatalog(phone) {
   try {
     const url = `https://graph.facebook.com/${VERSION}/${PHONE_NUMBER_ID}/messages`;
 
-    const items = [
-      { product_retailer_id: "6jx5tp7yqp" }, { product_retailer_id: "h51qjmskbx" }, { product_retailer_id: "y1qglajnhv" }, 
-      { product_retailer_id: "pbqnbacxrc" }, { product_retailer_id: "okaifyloso" }, { product_retailer_id: "wzvz714ih8" },
-      { product_retailer_id: "uxeg0mzdv7" }, { product_retailer_id: "hal9dbe85j" }, { product_retailer_id: "qmjc9xln9n" }, 
-      { product_retailer_id: "k3mzvkjbop" }, { product_retailer_id: "sd4answ073" }, { product_retailer_id: "hb5bkl8y3c" }, 
-      { product_retailer_id: "gpkcg34ube" }, { product_retailer_id: "392tn02rkm" }, { product_retailer_id: "snfun9b4kj" }, 
-      { product_retailer_id: "q4dsuhh93f" }, { product_retailer_id: "l1hyin9i52" }, { product_retailer_id: "nga4wkezrq" }, 
-      { product_retailer_id: "5ndcwpxef9" }, { product_retailer_id: "llrdmeudoy" }, { product_retailer_id: "6lzy4if9eg" }
-    ];
-
-    // Create sections to fit within the 10 items limit
-    const sections = [];
-    while (items.length > 0) {
-      sections.push({
-        title: "Our Products",
-        product_items: items.splice(0, 10), // Add up to 10 items per section
-      });
-    }
-
     const payload = {
       messaging_product: "whatsapp",
       to: phone,
@@ -854,7 +835,38 @@ async function sendDefaultCatalog(phone) {
         body: { text: "Order drinks directly & get free delivery!" },
         action: {
           catalog_id: "545943538321713",
-          sections: sections, // Send multiple sections
+          sections: [
+            {
+              title: "Our Products - Soft drinks",
+              product_items: [
+                { product_retailer_id: "6jx5tp7yqp" }, // Bralirwa
+                { product_retailer_id: "h51qjmskbx" }, // Bralirwa
+                { product_retailer_id: "y1qglajnhv" }, // Bralirwa
+                { product_retailer_id: "pbqnbacxrc" }, // Bralirwa
+                { product_retailer_id: "okaifyloso" },  // Bralirwa
+                { product_retailer_id: "wzvz714ih8" },  // Bralirwa
+                { product_retailer_id: "uxeg0mzdv7" },  // Bralirwa
+                { product_retailer_id: "hal9dbe85j" },  // beer
+                { product_retailer_id: "qmjc9xln9n" },  // beer
+                { product_retailer_id: "k3mzvkjbop" },  // beer
+              ],
+            },
+            {
+              title: "Our Products - Fermented drinks",
+              product_items: [
+                { product_retailer_id: "sd4answ073" },  // Beer Primus
+                { product_retailer_id: "hb5bkl8y3c" },  // Beer
+                { product_retailer_id: "gpkcg34ube" },  // Beer
+                { product_retailer_id: "392tn02rkm" },  // Beer Primus
+                { product_retailer_id: "snfun9b4kj" },  // Beer
+                { product_retailer_id: "q4dsuhh93f" },  // Beer
+                { product_retailer_id: "l1hyin9i52" },  // Soft drink
+                { product_retailer_id: "nga4wkezrq" },  // Soft drink
+                { product_retailer_id: "5ndcwpxef9" },  // Soft drink
+                { product_retailer_id: "llrdmeudoy" },  // Water
+              ],
+            },
+          ],
         },
       },
     };
@@ -872,7 +884,10 @@ async function sendDefaultCatalog(phone) {
     console.log("Default catalog sent successfully to:", phone);
     return response.data;
   } catch (error) {
-    console.error("Error sending default catalog:", error.response?.data || error.message);
+    console.error(
+      "Error sending default catalog:",
+      error.response?.data || error.message
+    );
     throw error;
   }
 }
