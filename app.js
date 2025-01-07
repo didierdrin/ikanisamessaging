@@ -818,42 +818,16 @@ async function sendWhatsAppMessage(phone, messagePayload) {
 }
 
 // new catalog with sections
+
 async function sendDefaultCatalog(phone) {
     try {
+        // WhatsApp has a limit of 30 products per section
+        // But only shows 10 products by default in product_list
+        const MAX_VISIBLE_PRODUCTS = 10;
+        
         const url = `https://graph.facebook.com/${VERSION}/${PHONE_NUMBER_ID}/messages`;
         
-        // Define all products with their sections for better management
-        const allProducts = {
-            carbonatedDrinks: [
-                { product_retailer_id: "6jx5tp7yqp" },
-                { product_retailer_id: "h51qjmskbx" },
-                { product_retailer_id: "y1qglajnhv" },
-                { product_retailer_id: "pbqnbacxrc" },
-                { product_retailer_id: "okaifyloso" }
-            ],
-            beers: [
-                { product_retailer_id: "wzvz714ih8" },
-                { product_retailer_id: "uxeg0mzdv7" },
-                { product_retailer_id: "vl5psbhdyu" },
-                { product_retailer_id: "jsbisgfh2s" },
-                { product_retailer_id: "6112shfwzj" }
-            ],
-            premiumBeers: [
-                { product_retailer_id: "xwmze396yj" },
-                { product_retailer_id: "gpkcg34ube" },
-                { product_retailer_id: "uhgfs0f7qk" },
-                { product_retailer_id: "qhsw5jx85f" },
-                { product_retailer_id: "rsl29fpztb" }
-            ],
-            softDrinks: [
-                { product_retailer_id: "l1hyin9i52" },
-                { product_retailer_id: "nga4wkezrq" },
-                { product_retailer_id: "5ndcwpxef9" },
-                { product_retailer_id: "llrdmeudoy" },
-                { product_retailer_id: "6lzy4if9eg" }
-            ]
-        };
-
+        // Split products into categories to work within limitations
         const payload = {
             messaging_product: "whatsapp",
             to: phone,
@@ -862,7 +836,7 @@ async function sendDefaultCatalog(phone) {
                 type: "product_list",
                 header: {
                     type: "text",
-                    text: "Icupa Menu"
+                    text: "Icupa Menu",
                 },
                 body: {
                     text: "Order drinks directly & get free delivery!"
@@ -871,33 +845,45 @@ async function sendDefaultCatalog(phone) {
                     catalog_id: "545943538321713",
                     sections: [
                         {
-                            title: "Soft Drinks",
-                            product_items: allProducts.carbonatedDrinks
+                            title: "Carbonated drinks",
+                            product_items: [
+                                { product_retailer_id: "6jx5tp7yqp" },
+                                { product_retailer_id: "h51qjmskbx" },
+                                { product_retailer_id: "y1qglajnhv" },
+                                { product_retailer_id: "pbqnbacxrc" },
+                                { product_retailer_id: "okaifyloso" },
+                                { product_retailer_id: "wzvz714ih8" },
+                                { product_retailer_id: "uxeg0mzdv7" },
+                                { product_retailer_id: "vl5psbhdyu" },
+                                { product_retailer_id: "jsbisgfh2s" },
+                                
+                            ]
                         },
                         {
-                            title: "Regular Beers",
-                            product_items: allProducts.beers
+                            title: "More Beers",
+                            product_items: [
+                                { product_retailer_id: "6112shfwzj" },
+                                { product_retailer_id: "xwmze396yj" },
+                                { product_retailer_id: "gpkcg34ube" },
+                                { product_retailer_id: "uhgfs0f7qk" },
+                                { product_retailer_id: "qhsw5jx85f" },
+                                { product_retailer_id: "rsl29fpztb" }
+                            ]
                         },
                         {
-                            title: "Premium Beers",
-                            product_items: allProducts.premiumBeers
-                        },
-                        {
-                            title: "Refreshments",
-                            product_items: allProducts.softDrinks
+                            title: "Soft Drinks & Water",
+                            product_items: [
+                                { product_retailer_id: "l1hyin9i52" },
+                                { product_retailer_id: "nga4wkezrq" },
+                                { product_retailer_id: "5ndcwpxef9" },
+                                { product_retailer_id: "llrdmeudoy" },
+                                { product_retailer_id: "6lzy4if9eg" }
+                            ]
                         }
                     ]
                 }
             }
         };
-
-        // Add validation and logging
-        payload.interactive.action.sections.forEach((section, index) => {
-            if (section.product_items.length > 10) {
-                console.warn(`Warning: Section ${section.title} has more than 10 items. Some items may not be visible.`);
-            }
-            console.log(`Section ${section.title}: ${section.product_items.length} items`);
-        });
 
         const response = await axios({
             method: "POST",
@@ -910,20 +896,16 @@ async function sendDefaultCatalog(phone) {
         });
 
         console.log("Default catalog sent successfully to:", phone);
-        console.log("Total products:", Object.values(allProducts).flat().length);
         return response.data;
     } catch (error) {
-        const errorMessage = error.response?.data?.error?.message || error.message;
-        console.error("Error sending default catalog:", errorMessage);
-        
-        // Log detailed error information
-        if (error.response?.data) {
-            console.error("API Error Details:", JSON.stringify(error.response.data, null, 2));
-        }
-        
+        console.error(
+            "Error sending default catalog:",
+            error.response?.data || error.message
+        );
         throw error;
     }
 }
+
 
 
 // Route to manually trigger a message
