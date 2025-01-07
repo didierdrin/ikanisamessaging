@@ -860,7 +860,7 @@ async function sendDefaultCatalog(phone) {
                             ]
                         },
                         {
-                            title: "More Beers",
+                            title: "Beers",
                             product_items: [
                                 { product_retailer_id: "nps80shj0n" },
                                 { product_retailer_id: "08gro8egrt" },
