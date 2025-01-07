@@ -850,7 +850,7 @@ async function sendDefaultCatalog(phone) {
                                 { product_retailer_id: "rsr1ylb59u" },
                                 { product_retailer_id: "7att19g5jx" },
                                 { product_retailer_id: "9228pxmhie" },
-                                { product_retailer_id: "0wj2933xch" },
+                                { product_retailer_id: "pxr5cj18u7" },
                                 { product_retailer_id: "08gro8egrt" },
                                 { product_retailer_id: "gpkcg34ube" },
                 
