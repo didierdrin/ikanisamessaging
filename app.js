@@ -818,6 +818,72 @@ async function sendWhatsAppMessage(phone, messagePayload) {
 }
 
 // new catalog with sections
+async function sendDefaultCatalog(phone) {
+  try {
+    const url = `https://graph.facebook.com/${VERSION}/${PHONE_NUMBER_ID}/messages`;
+
+    const payload = {
+      messaging_product: "whatsapp",
+      to: phone,
+      type: "interactive",
+      interactive: {
+        type: "product_list",
+        header: {
+          type: "text",
+          text: "Icupa Menu",
+        },
+        body: { text: "Order drinks directly & get free delivery!" },
+        action: {
+          catalog_id: "545943538321713",
+          sections: [
+            {
+              title: "Our Products",
+              product_items: [
+                                { product_retailer_id: "6jx5tp7yqp" }, // carbonated drinks
+                                { product_retailer_id: "h51qjmskbx" },
+                                { product_retailer_id: "y1qglajnhv" },
+                                { product_retailer_id: "pbqnbacxrc" },
+                                { product_retailer_id: "okaifyloso" },
+                                { product_retailer_id: "wzvz714ih8" },
+                                { product_retailer_id: "uxeg0mzdv7" }, 
+                                { product_retailer_id: "f1l30yprte" }, // beers
+                                { product_retailer_id: "rsr1ylb59u" },
+                                { product_retailer_id: "7att19g5jx" },
+                                { product_retailer_id: "9228pxmhie" },
+                                { product_retailer_id: "0wj2933xch" },
+                                { product_retailer_id: "08gro8egrt" },
+                                { product_retailer_id: "gpkcg34ube" },
+                
+              ],
+            },
+          ],
+        },
+      },
+    };
+
+    const response = await axios({
+      method: "POST",
+      url: url,
+      headers: {
+        Authorization: `Bearer ${ACCESS_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      data: payload,
+    });
+
+    console.log("Default catalog sent successfully to:", phone);
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Error sending default catalog:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+}
+
+
+
 
 async function sendDefaultCatalog(phone) {
     try {
