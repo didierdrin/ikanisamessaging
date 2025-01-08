@@ -529,6 +529,7 @@ const handleInteractiveMessages = async (message, phone) => {
   }
 };
 
+
 const handleLocation = async (location, phone) => {
   try {
     const ordersSnapshot = await firestore
@@ -555,27 +556,15 @@ const handleLocation = async (location, phone) => {
       );
 
       await sendWhatsAppMessage(phone, {
-        type: "interactive",
-        interactive: {
-          type: "button",
-          body: {
-            text: "Proceed to payment",
-          },
-          action: {
-            buttons: [
-              { type: "reply", reply: { id: "mtn_momo", title: "MTN MoMo" } },
-              {
-                type: "reply",
-                reply: { id: "airtel_mobile_money", title: "Airtel Money" },
-              },
-            ],
-          },
-        },
+        type: "text",
+    text: {
+      body: "Please provide your TIN(e.g., 101589140):",
+    },
       });
 
       // Update user context to expect a document
       const userContext = userContexts.get(phone) || {};
-      userContext.stage = "EXPECTING_MTN_AIRTEL";
+      userContext.stage = "EXPECTING_TIN";
       userContexts.set(phone, userContext);
 
       console.log("Location saved and payment options sent.");
@@ -685,6 +674,46 @@ app.post("/webhook", async (req, res) => {
               await handlePlateNumberValidation(message, phone);
               await handleDateValidation(message, phone);
               await handleNumberOfPeople(message, phone);
+              if (userContext.stage === "EXPECTING_TIN") {
+                const tin = message.text.body.trim();
+                if (tin) {
+                  console.log(`User ${phone} provided TIN: ${tin}`);
+                  // Store the TIN or process it as required
+                  // Update the context to expect the location
+                  //userContext.tin = tin;  // Save the TIN
+                  userContext.stage = "EXPECTING_MTN_AIRTEL"; // Move to location stage
+                  userContexts.set(phone, userContext);
+
+                  await sendWhatsAppMessage(phone, {
+        type: "interactive",
+        interactive: {
+          type: "button",
+          body: {
+            text: "Proceed to payment",
+          },
+          action: {
+            buttons: [
+              { type: "reply", reply: { id: "mtn_momo", title: "MTN MoMo" } },
+              {
+                type: "reply",
+                reply: { id: "airtel_mobile_money", title: "Airtel Money" },
+              },
+            ],
+          },
+        },
+      });
+
+                  return;  // Exit early after processing TIN
+                } else {
+                  await sendWhatsAppMessage(phone, {
+                    type: "text",
+                    text: {
+                      body: "Invalid TIN. Please provide a valid TIN.",
+                    },
+                  });
+                  return;
+                }
+              }
               break;
 
             case "interactive":
