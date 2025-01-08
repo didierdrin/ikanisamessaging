@@ -839,6 +839,8 @@ async function sendDefaultCatalog(phone) {
             {
               title: "Our Products",
               product_items: [
+                                { product_retailer_id: "2rpb9y0j3h" },
+                                { product_retailer_id: "lxas8cc342" }, // two latest
                                 { product_retailer_id: "h4xmmo1ety" },
                                 { product_retailer_id: "zhu1lut550" },
                                 { product_retailer_id: "c4k31e9exv" },
