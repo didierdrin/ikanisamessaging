@@ -878,9 +878,9 @@ async function sendDefaultCatalog(phone) {
                                 { product_retailer_id: "okaifyloso" },
                                 { product_retailer_id: "wzvz714ih8" },
                                 { product_retailer_id: "uxeg0mzdv7" },  
-                                { product_retailer_id: "hthrt73l7b" }, // beers //Amstel
+                                { product_retailer_id: "ms6454zuay" }, // beers //Amstel
                                 { product_retailer_id: "08gro8egrt" }, // Heinken
-                                { product_retailer_id: "gpkcg34ube" }, // Turbo King
+                                { product_retailer_id: "boq0hoiq7a" }, // Turbo King
                                 { product_retailer_id: "fqt5zp6z5k" }, // Legend
                                 { product_retailer_id: "l4bflbemkw" }, // Mutzig 33 CL
                                 { product_retailer_id: "k0bsesfzs8" }, // Mutzig 65 CL
