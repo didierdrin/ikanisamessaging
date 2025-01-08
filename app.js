@@ -878,7 +878,7 @@ async function sendDefaultCatalog(phone) {
                                 { product_retailer_id: "okaifyloso" },
                                 { product_retailer_id: "wzvz714ih8" },
                                 { product_retailer_id: "uxeg0mzdv7" },  
-                                { product_retailer_id: "efk686kiqq" }, // beers //Amstel
+                                { product_retailer_id: "vjhy3p7ho7" }, // beers //Amstel
                                 { product_retailer_id: "08gro8egrt" }, // Heinken
                                 { product_retailer_id: "boq0hoiq7a" }, // Turbo King
                                 { product_retailer_id: "fqt5zp6z5k" }, // Legend
