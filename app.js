@@ -674,6 +674,7 @@ app.post("/webhook", async (req, res) => {
               await handlePlateNumberValidation(message, phone);
               await handleDateValidation(message, phone);
               await handleNumberOfPeople(message, phone);
+              const userContext = userContexts.get(phone) || {};
               if (userContext.stage === "EXPECTING_TIN") {
                 const tin = message.text.body.trim();
                 if (tin) {
