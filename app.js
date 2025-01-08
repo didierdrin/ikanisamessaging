@@ -869,12 +869,8 @@ async function sendDefaultCatalog(phone) {
             {
               title: "Our Products",
               product_items: [
-                                { product_retailer_id: "2rpb9y0j3h" },
+                                
                                 { product_retailer_id: "lxas8cc342" }, // two latest
-                                { product_retailer_id: "h4xmmo1ety" },
-                                { product_retailer_id: "zhu1lut550" },
-                                { product_retailer_id: "l1lspt5tgu" },
-                                { product_retailer_id: "y6ydhsj1cs" },
                                 { product_retailer_id: "6jx5tp7yqp" }, // carbonated drinks
                                 { product_retailer_id: "h51qjmskbx" },
                                 { product_retailer_id: "y1qglajnhv" },
@@ -885,6 +881,11 @@ async function sendDefaultCatalog(phone) {
                                 { product_retailer_id: "legend30" }, // beers
                                 { product_retailer_id: "08gro8egrt" },
                                 { product_retailer_id: "gpkcg34ube" },
+                                { product_retailer_id: "hthrt73l7b" }, // Amstel
+                                { product_retailer_id: "h4xmmo1ety" },
+                                { product_retailer_id: "zhu1lut550" },
+                                { product_retailer_id: "l1lspt5tgu" },
+                                { product_retailer_id: "y6ydhsj1cs" },
                 
               ],
             },
