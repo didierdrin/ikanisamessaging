@@ -558,7 +558,7 @@ const handleLocation = async (location, phone) => {
       await sendWhatsAppMessage(phone, {
         type: "text",
     text: {
-      body: "Please provide your TIN(e.g., 101589140):",
+      body: "Please provide your TIN(e.g., 101589140)",
     },
       });
 
