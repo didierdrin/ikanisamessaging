@@ -882,10 +882,10 @@ async function sendDefaultCatalog(phone) {
                                 { product_retailer_id: "08gro8egrt" },
                                 { product_retailer_id: "gpkcg34ube" },
                                 { product_retailer_id: "hthrt73l7b" }, // Amstel
-                                { product_retailer_id: "h4xmmo1ety" },
-                                { product_retailer_id: "zhu1lut550" },
-                                { product_retailer_id: "l1lspt5tgu" },
-                                { product_retailer_id: "y6ydhsj1cs" },
+                                { product_retailer_id: "kty61e8t45" },
+                                { product_retailer_id: "k0bsesfzs8" },
+                                { product_retailer_id: "td55lg0z7v" },
+                                { product_retailer_id: "qqbhwrsty8" },
                 
               ],
             },
