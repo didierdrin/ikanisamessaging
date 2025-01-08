@@ -843,7 +843,7 @@ async function sendDefaultCatalog(phone) {
                                 { product_retailer_id: "lxas8cc342" }, // two latest
                                 { product_retailer_id: "h4xmmo1ety" },
                                 { product_retailer_id: "zhu1lut550" },
-                                { product_retailer_id: "c4k31e9exv" },
+                                { product_retailer_id: "l1lspt5tgu" },
                                 { product_retailer_id: "y6ydhsj1cs" },
                                 { product_retailer_id: "6jx5tp7yqp" }, // carbonated drinks
                                 { product_retailer_id: "h51qjmskbx" },
