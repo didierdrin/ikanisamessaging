@@ -859,8 +859,11 @@ async function sendDefaultCatalog(phone) {
       interactive: {
         type: "product_list",
         header: {
-          type: "text",
-          text: "Icupa Menu",
+          type: "image",  // The header type should be "image" to support both image and text
+          image: {
+            link: "https://firebasestorage.googleapis.com/v0/b/icupa-396da.appspot.com/o/categories%2FWhatsApp_Image_2025-01-10_at_11.15.08_058d45d8-removebg-preview.png?alt=media&token=373788a9-94a3-4820-988c-b2e142a6b05d"
+          },
+          text: "Icupa App"  // You can include text along with the image
         },
         body: { text: "Order drinks directly & get free delivery!" },
         action: {
@@ -869,24 +872,22 @@ async function sendDefaultCatalog(phone) {
             {
               title: "Our Products",
               product_items: [
-                                
-                                { product_retailer_id: "lxas8cc342" }, // two latest
-                                { product_retailer_id: "6jx5tp7yqp" }, // carbonated drinks
-                                { product_retailer_id: "h51qjmskbx" },
-                                { product_retailer_id: "y1qglajnhv" },
-                                { product_retailer_id: "pbqnbacxrc" },
-                                { product_retailer_id: "okaifyloso" },
-                                { product_retailer_id: "wzvz714ih8" },
-                                { product_retailer_id: "uxeg0mzdv7" },  
-                                { product_retailer_id: "vjvih6bc4b" }, // beers //Amstel
-                                { product_retailer_id: "08gro8egrt" }, // Heinken
-                                { product_retailer_id: "boq0hoiq7a" }, // Turbo King
-                                { product_retailer_id: "fqt5zp6z5k" }, // Legend
-                                { product_retailer_id: "l4bflbemkw" }, // Mutzig 33 CL
-                                { product_retailer_id: "k0bsesfzs8" }, // Mutzig 65 CL
-                                { product_retailer_id: "td55lg0z7v" }, // Primus 50 CL
-                                { product_retailer_id: "qqbhwrsty8" }, // Primus 70 CL
-                
+                { product_retailer_id: "lxas8cc342" }, // two latest
+                { product_retailer_id: "6jx5tp7yqp" }, // carbonated drinks
+                { product_retailer_id: "h51qjmskbx" },
+                { product_retailer_id: "y1qglajnhv" },
+                { product_retailer_id: "pbqnbacxrc" },
+                { product_retailer_id: "okaifyloso" },
+                { product_retailer_id: "wzvz714ih8" },
+                { product_retailer_id: "uxeg0mzdv7" },
+                { product_retailer_id: "vjvih6bc4b" }, // beers //Amstel
+                { product_retailer_id: "08gro8egrt" }, // Heinken
+                { product_retailer_id: "boq0hoiq7a" }, // Turbo King
+                { product_retailer_id: "fqt5zp6z5k" }, // Legend
+                { product_retailer_id: "l4bflbemkw" }, // Mutzig 33 CL
+                { product_retailer_id: "k0bsesfzs8" }, // Mutzig 65 CL
+                { product_retailer_id: "td55lg0z7v" }, // Primus 50 CL
+                { product_retailer_id: "qqbhwrsty8" }, // Primus 70 CL
               ],
             },
           ],
@@ -914,7 +915,6 @@ async function sendDefaultCatalog(phone) {
     throw error;
   }
 }
-
 
 
 
