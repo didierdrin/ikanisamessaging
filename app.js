@@ -859,10 +859,7 @@ async function sendDefaultCatalog(phone) {
       interactive: {
         type: "product_list",
         header: {
-          type: "image",  // The header type should be "image" to support both image and text
-          image: {
-            link: "https://firebasestorage.googleapis.com/v0/b/icupa-396da.appspot.com/o/categories%2FWhatsApp_Image_2025-01-10_at_11.15.08_058d45d8-removebg-preview.png?alt=media&token=373788a9-94a3-4820-988c-b2e142a6b05d"
-          },
+          type: "text",  // The header type should be "image" to support both image and text
           text: "Icupa App"  // You can include text along with the image
         },
         body: { text: "Order drinks directly & get free delivery!" },
