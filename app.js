@@ -860,7 +860,7 @@ async function sendDefaultCatalog(phone) {
         type: "product_list",
         header: {
           type: "text",  // The header type should be "image" to support both image and text
-          text: "Icupa App"  // You can include text along with the image
+          text: "ICUPA App"  // You can include text along with the image
         },
         body: { text: "Order drinks directly & get free delivery!" },
         action: {
