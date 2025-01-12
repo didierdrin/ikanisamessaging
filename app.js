@@ -870,6 +870,9 @@ async function sendDefaultCatalog(phone) {
               title: "Our Products",
               product_items: [
                 { product_retailer_id: "lxas8cc342" }, // two latest
+                { product_retailer_id: "fn92a2u1n0" },
+                { product_retailer_id: "4nv3b0a4je" },
+                { product_retailer_id: "f1i6w3reo3" },
                 { product_retailer_id: "6jx5tp7yqp" }, // carbonated drinks
                 { product_retailer_id: "h51qjmskbx" },
                 { product_retailer_id: "y1qglajnhv" },
@@ -877,6 +880,11 @@ async function sendDefaultCatalog(phone) {
                 { product_retailer_id: "okaifyloso" },
                 { product_retailer_id: "wzvz714ih8" },
                 { product_retailer_id: "uxeg0mzdv7" },
+                { product_retailer_id: "qye71mwlt6" },
+                { product_retailer_id: "80g014ofpq" },
+                { product_retailer_id: "7ylsmqn0mg" },
+                { product_retailer_id: "i0ts8ijseh" },
+                { product_retailer_id: "qlufbd1r69" },
                 { product_retailer_id: "vjvih6bc4b" }, // beers //Amstel
                 { product_retailer_id: "08gro8egrt" }, // Heinken
                 { product_retailer_id: "boq0hoiq7a" }, // Turbo King
