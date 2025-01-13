@@ -859,23 +859,23 @@ async function sendDefaultCatalog(phone) {
       interactive: {
         type: "product_list",
         header: {
-          type: "text",  // The header type should be "image" to support both image and text
-          text: "ICUPA App"  // You can include text along with the image
+          type: "text",
+          text: "ICUPA App"  // Title of the catalog
         },
         body: { text: "Order drinks directly & get free delivery!" },
         action: {
           catalog_id: "545943538321713",
           sections: [
             {
-              title: "Our Products",
+              title: "Soft Drinks",  // Section for soft drinks
               product_items: [
-                { product_retailer_id: "lxas8cc342" }, // two latest
+                { product_retailer_id: "lxas8cc342" }, // Two latest
                 { product_retailer_id: "wzz0yoorin" },
                 { product_retailer_id: "5bn8ew7t9v" },
                 { product_retailer_id: "fn92a2u1n0" },
                 { product_retailer_id: "4nv3b0a4je" },
                 { product_retailer_id: "f1i6w3reo3" },
-                { product_retailer_id: "6jx5tp7yqp" }, // carbonated drinks
+                { product_retailer_id: "6jx5tp7yqp" }, // Carbonated drinks
                 { product_retailer_id: "h51qjmskbx" },
                 { product_retailer_id: "y1qglajnhv" },
                 { product_retailer_id: "pbqnbacxrc" },
@@ -891,21 +891,26 @@ async function sendDefaultCatalog(phone) {
                 { product_retailer_id: "80g014ofpq" },
                 { product_retailer_id: "7ylsmqn0mg" },
                 { product_retailer_id: "i0ts8ijseh" },
-                { product_retailer_id: "qlufbd1r69" },
-                { product_retailer_id: "vjvih6bc4b" }, // beers //Amstel
-                { product_retailer_id: "08gro8egrt" }, // Heinken
+                { product_retailer_id: "qlufbd1r69" }
+              ],
+            },
+            {
+              title: "Beers",  // Section for beers
+              product_items: [
+                { product_retailer_id: "vjvih6bc4b" }, // Amstel
+                { product_retailer_id: "08gro8egrt" }, // Heineken
                 { product_retailer_id: "boq0hoiq7a" }, // Turbo King
                 { product_retailer_id: "fqt5zp6z5k" }, // Legend
-                { product_retailer_id: "l4bflbemkw" }, // Mutzig 33 CL 
+                { product_retailer_id: "l4bflbemkw" }, // Mutzig 33 CL
                 { product_retailer_id: "njlmxlf1zp" },
                 { product_retailer_id: "k0bsesfzs8" }, // Mutzig 65 CL
                 { product_retailer_id: "td55lg0z7v" }, // Primus 50 CL
-                { product_retailer_id: "qqbhwrsty8" }, // Primus 70 CL
-              ],
-            },
-          ],
-        },
-      },
+                { product_retailer_id: "qqbhwrsty8" }  // Primus 70 CL
+              ]
+            }
+          ]
+        }
+      }
     };
 
     const response = await axios({
@@ -913,9 +918,9 @@ async function sendDefaultCatalog(phone) {
       url: url,
       headers: {
         Authorization: `Bearer ${ACCESS_TOKEN}`,
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
-      data: payload,
+      data: payload
     });
 
     console.log("Default catalog sent successfully to:", phone);
