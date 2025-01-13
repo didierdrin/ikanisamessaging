@@ -912,7 +912,7 @@ async function sendDefaultCatalog(phone) {
       method: "POST",
       url: url,
       headers: {
-        Authorization: Bearer ${ACCESS_TOKEN},
+        Authorization: `Bearer ${ACCESS_TOKEN}`,
         "Content-Type": "application/json",
       },
       data: payload,
