@@ -393,14 +393,14 @@ const handleOrder = async (message, changes, displayPhoneNumber) => {
 
   try {
     // Optionally, save order to external API
-    await axios.post(
-      `https://ikanisamessaging.onrender.com/api/save-order`,
-      {
-        orderId,
-        customerInfo,
-        items,
-      }
-    );
+    //await axios.post(
+    //  `https://ikanisamessaging.onrender.com/api/save-order`,
+    //  {
+    //    orderId,
+    //    customerInfo,
+    //    items,
+    //  }
+    //);
 
     // Send location request message
     const locationRequestPayload = {
