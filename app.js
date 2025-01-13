@@ -382,15 +382,7 @@ const handleOrder = async (message, changes, displayPhoneNumber) => {
   );
 
   try {
-    await axios.post(
-      `https://ikanisamessaging.onrender.com/api/save-order`,
-      {
-        orderId,
-        customerInfo,
-        items,
-      }
-    );
-
+    // Send the location request message
     const locationRequestPayload = {
       type: "interactive",
       interactive: {
@@ -404,12 +396,57 @@ const handleOrder = async (message, changes, displayPhoneNumber) => {
       },
     };
 
+    // Send the location request message to the user
     await sendWhatsAppMessage(customerInfo.phone, locationRequestPayload);
-    console.log("Order saved successfully.");
+    console.log("Order initiated successfully. Awaiting location...");
+
   } catch (error) {
-    console.error("Error saving order:", error.message);
+    console.error("Error processing order:", error.message);
   }
 };
+
+//const handleOrder = async (message, changes, displayPhoneNumber) => {
+//  const order = message.order;
+//  const orderId = message.id;
+//  const customerInfo = {
+//    phone: changes.value.contacts[0].wa_id,
+//    receiver: displayPhoneNumber,
+//  };
+//  const items = order.product_items;
+//  const totalAmount = items.reduce(
+//    (total, item) => total + item.item_price * item.quantity,
+//    0
+//  );
+//
+//  try {
+//    await axios.post(
+//      `https://ikanisamessaging.onrender.com/api/save-order`,
+//      {
+//        orderId,
+//        customerInfo,
+//        items,
+//     }
+//    );
+
+//    const locationRequestPayload = {
+//      type: "interactive",
+//      interactive: {
+//        type: "location_request_message",
+//        body: {
+//          text: "Share your delivery location",
+//        },
+//        action: {
+//          name: "send_location",
+//        },
+//      },
+//    };
+
+//    await sendWhatsAppMessage(customerInfo.phone, locationRequestPayload);
+//    console.log("Order saved successfully.");
+//  } catch (error) {
+//    console.error("Error saving order:", error.message);
+//  }
+//};
 
 const handleTextMessages = async (message, phone) => {
   const messageText = message.text.body.trim().toLowerCase();
@@ -529,9 +566,9 @@ const handleInteractiveMessages = async (message, phone) => {
   }
 };
 
-
 const handleLocation = async (location, phone) => {
   try {
+    // Check if there is an active unpaid order for the user
     const ordersSnapshot = await firestore
       .collection("whatsappOrders")
       .where("user", "==", `+${phone}`)
@@ -543,6 +580,7 @@ const handleLocation = async (location, phone) => {
       const orderDoc = ordersSnapshot.docs[0];
       const orderData = orderDoc.data();
 
+      // Update the order with location details
       await orderDoc.ref.update({
         deliveryLocation: {
           latitude: location.latitude,
@@ -550,26 +588,42 @@ const handleLocation = async (location, phone) => {
         },
       });
 
-      const totalAmount = orderData.products.reduce(
-        (total, product) => total + product.price * product.quantity,
-        0
+      // Now save the order with location to the external API
+      const orderId = orderDoc.id;  // Use the Firestore document ID
+      const customerInfo = {
+        phone: phone,
+        receiver: phone,  // Adjust this as per your logic (receiver details)
+      };
+      const items = orderData.products;
+
+      // Make the API call to save the order with location
+      await axios.post(
+        `https://ikanisamessaging.onrender.com/api/save-order`,
+        {
+          orderId,
+          customerInfo,
+          items,
+        }
       );
 
+      // Send the TIN request to the customer
       await sendWhatsAppMessage(phone, {
         type: "text",
-    text: {
-      body: "Please provide your TIN(e.g., 101589140)",
-    },
+        text: {
+          body: "Please provide your TIN (e.g., 101589140):",
+        },
       });
 
-      // Update user context to expect a document
+      // Update user context to expect TIN input
       const userContext = userContexts.get(phone) || {};
       userContext.stage = "EXPECTING_TIN";
       userContexts.set(phone, userContext);
 
-      console.log("Location saved and payment options sent.");
+      console.log("Location updated and order saved successfully.");
     } else {
       console.log("No unpaid order found for this user.");
+
+      // If no order found, create a new order and send a message
       await sendWhatsAppMessage(phone, {
         type: "text",
         text: {
@@ -578,7 +632,7 @@ const handleLocation = async (location, phone) => {
       });
     }
   } catch (error) {
-    console.error("Error processing location and payment:", error);
+    console.error("Error processing location and saving order:", error.message);
     await sendWhatsAppMessage(phone, {
       type: "text",
       text: {
@@ -587,6 +641,64 @@ const handleLocation = async (location, phone) => {
     });
   }
 };
+
+//const handleLocation = async (location, phone) => {
+//  try {
+//    const ordersSnapshot = await firestore
+//      .collection("whatsappOrders")
+//      .where("user", "==", `+${phone}`)
+//      .where("paid", "==", false)
+//      .limit(1)
+//      .get();
+
+//    if (!ordersSnapshot.empty) {
+//      const orderDoc = ordersSnapshot.docs[0];
+//      const orderData = orderDoc.data();
+
+//      await orderDoc.ref.update({
+//        deliveryLocation: {
+//          latitude: location.latitude,
+//          longitude: location.longitude,
+//        },
+//      });
+
+//      const totalAmount = orderData.products.reduce(
+//        (total, product) => total + product.price * product.quantity,
+//        0
+//      );
+
+//      await sendWhatsAppMessage(phone, {
+//        type: "text",
+//    text: {
+//      body: "Please provide your TIN(e.g., 101589140)",
+//    },
+//      });
+
+      // Update user context to expect a document
+ //     const userContext = userContexts.get(phone) || {};
+ //     userContext.stage = "EXPECTING_TIN";
+ //     userContexts.set(phone, userContext);
+
+//      console.log("Location saved and payment options sent.");
+//    } else {
+//      console.log("No unpaid order found for this user.");
+//      await sendWhatsAppMessage(phone, {
+//        type: "text",
+//        text: {
+//          body: "We couldn't find an active order. Please place an order first.",
+//        },
+//      });
+//    }
+//  } catch (error) {
+ //   console.error("Error processing location and payment:", error);
+ //   await sendWhatsAppMessage(phone, {
+ //     type: "text",
+ //     text: {
+ //       body: `Sorry, there was an error processing your location: ${error.message}. Please try again.`,
+ //     },
+ //   });
+ // }
+//};
 
 const handleDocumentUpload = async (message, phone) => {
   const userContext = userContexts.get(phone) || {};
