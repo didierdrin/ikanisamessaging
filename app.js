@@ -629,14 +629,14 @@ const handleLocation = async (location, phone) => {
     console.log("Order saved successfully with ID:", docRef.id);
 
     // Now save the order to the external API
-    await axios.post(
-      `https://ikanisamessaging.onrender.com/api/save-order`,
-      {
-        orderId,
-        customerInfo,
-        items,
-      }
-    );
+   // await axios.post(
+   //   `https://ikanisamessaging.onrender.com/api/save-order`,
+   //   {
+   //     orderId,
+   //     customerInfo,
+   //     items,
+   //   }
+   // );
 
     console.log("Order successfully saved to the external API.");
 
