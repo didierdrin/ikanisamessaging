@@ -850,7 +850,7 @@ async function sendWhatsAppMessage(phone, messagePayload) {
 // new catalog with sections
 async function sendDefaultCatalog(phone) {
   try {
-    const url = https://graph.facebook.com/${VERSION}/${PHONE_NUMBER_ID}/messages;
+    const url = `https://graph.facebook.com/${VERSION}/${PHONE_NUMBER_ID}/messages`;
 
     const payload = {
       messaging_product: "whatsapp",
