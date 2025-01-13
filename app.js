@@ -381,8 +381,28 @@ const handleOrder = async (message, changes, displayPhoneNumber) => {
     0
   );
 
+  // Save the order details into userContext
+  const userContext = userContexts.get(customerInfo.phone) || {};
+  userContext.order = {
+    orderId,
+    customerInfo,
+    items,
+    totalAmount,
+  };
+  userContexts.set(customerInfo.phone, userContext);
+
   try {
-    // Send the location request message
+    // Optionally, save order to external API
+    await axios.post(
+      `https://ikanisamessaging.onrender.com/api/save-order`,
+      {
+        orderId,
+        customerInfo,
+        items,
+      }
+    );
+
+    // Send location request message
     const locationRequestPayload = {
       type: "interactive",
       interactive: {
@@ -396,14 +416,13 @@ const handleOrder = async (message, changes, displayPhoneNumber) => {
       },
     };
 
-    // Send the location request message to the user
     await sendWhatsAppMessage(customerInfo.phone, locationRequestPayload);
-    console.log("Order initiated successfully. Awaiting location...");
-
+    console.log("Order saved successfully.");
   } catch (error) {
-    console.error("Error processing order:", error.message);
+    console.error("Error saving order:", error.message);
   }
 };
+
 
 //const handleOrder = async (message, changes, displayPhoneNumber) => {
 //  const order = message.order;
@@ -568,69 +587,72 @@ const handleInteractiveMessages = async (message, phone) => {
 
 const handleLocation = async (location, phone) => {
   try {
-    // Check if there is an active unpaid order for the user
-    const ordersSnapshot = await firestore
-      .collection("whatsappOrders")
-      .where("user", "==", `+${phone}`)
-      .where("paid", "==", false)
-      .limit(1)
-      .get();
-
-    if (!ordersSnapshot.empty) {
-      const orderDoc = ordersSnapshot.docs[0];
-      const orderData = orderDoc.data();
-
-      // Update the order with location details
-      await orderDoc.ref.update({
-        deliveryLocation: {
-          latitude: location.latitude,
-          longitude: location.longitude,
-        },
-      });
-
-      // Now save the order with location to the external API
-      const orderId = orderDoc.id;  // Use the Firestore document ID
-      const customerInfo = {
-        phone: phone,
-        receiver: phone,  // Adjust this as per your logic (receiver details)
-      };
-      const items = orderData.products;
-
-      // Make the API call to save the order with location
-      await axios.post(
-        `https://ikanisamessaging.onrender.com/api/save-order`,
-        {
-          orderId,
-          customerInfo,
-          items,
-        }
-      );
-
-      // Send the TIN request to the customer
+    // Retrieve the order from userContext
+    const userContext = userContexts.get(phone);
+    
+    if (!userContext || !userContext.order) {
+      console.log("No order found in user context.");
       await sendWhatsAppMessage(phone, {
         type: "text",
         text: {
-          body: "Please provide your TIN (e.g., 101589140):",
+          body: "No active order found. Please place an order first.",
         },
       });
-
-      // Update user context to expect TIN input
-      const userContext = userContexts.get(phone) || {};
-      userContext.stage = "EXPECTING_TIN";
-      userContexts.set(phone, userContext);
-
-      console.log("Location updated and order saved successfully.");
-    } else {
-      console.log("No unpaid order found for this user.");
-
-      // If no order found, create a new order and send a message
-      await sendWhatsAppMessage(phone, {
-        type: "text",
-        text: {
-          body: "We couldn't find an active order. Please place an order first.",
-        },
-      });
+      return;
     }
+
+    // Extract order details from userContext
+    const { orderId, customerInfo, items, totalAmount } = userContext.order;
+
+    // Update the order with location details
+    const orderData = {
+      orderId,
+      phone: customerInfo.phone,
+      amount: totalAmount,  // Include the calculated totalAmount
+      products: items,      // Include the product items
+      user: `+${customerInfo.phone}`,
+      date: new Date(),
+      paid: false,
+      rejected: false,
+      served: false,
+      accepted: false,
+      vendor: `+250788767816`,  // Adjust vendor info as needed
+      deliveryLocation: {
+        latitude: location.latitude,
+        longitude: location.longitude,
+      }
+    };
+
+    // Save the order with location to Firestore
+    const docRef = await firestore.collection("whatsappOrders").add(orderData);
+
+    console.log("Order saved successfully with ID:", docRef.id);
+
+    // Now save the order to the external API
+    await axios.post(
+      `https://ikanisamessaging.onrender.com/api/save-order`,
+      {
+        orderId,
+        customerInfo,
+        items,
+      }
+    );
+
+    console.log("Order successfully saved to the external API.");
+
+    // Send the TIN request to the customer
+    await sendWhatsAppMessage(phone, {
+      type: "text",
+      text: {
+        body: "Please provide your TIN (e.g., 101589140):",
+      },
+    });
+
+    // Update user context to expect TIN input
+    userContext.stage = "EXPECTING_TIN";
+    userContexts.set(phone, userContext);
+
+    console.log("Location updated and order saved successfully.");
   } catch (error) {
     console.error("Error processing location and saving order:", error.message);
     await sendWhatsAppMessage(phone, {
@@ -641,6 +663,7 @@ const handleLocation = async (location, phone) => {
     });
   }
 };
+
 
 //const handleLocation = async (location, phone) => {
 //  try {
