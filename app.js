@@ -602,43 +602,27 @@ const handleLocation = async (location, phone) => {
     }
 
     // Extract order details from userContext
-    const { orderId, customerInfo, items, totalAmount } = userContext.order;
+    const { orderId, customerInfo, items } = userContext.order;
 
-    // Update the order with location details
-    const orderData = {
-      orderId,
-      phone: customerInfo.phone,
-      amount: totalAmount,  // Include the calculated totalAmount
-      products: items,      // Include the product items
-      user: `+${customerInfo.phone}`,
-      date: new Date(),
-      paid: false,
-      rejected: false,
-      served: false,
-      accepted: false,
-      vendor: `+250788767816`,  // Adjust vendor info as needed
-      deliveryLocation: {
-        latitude: location.latitude,
-        longitude: location.longitude,
+    // Calculate total amount from items
+    const totalAmount = items.reduce((total, item) => total + (item.item_price * item.quantity), 0);
+
+    // Now save the order to the external API with location information
+    const response = await axios.post(
+      `https://ikanisamessaging.onrender.com/api/save-order`,
+      {
+        orderId,
+        customerInfo,
+        items,
+        totalAmount,
+        deliveryLocation: {
+          latitude: location.latitude,
+          longitude: location.longitude,
+        }
       }
-    };
+    );
 
-    // Save the order with location to Firestore
-    const docRef = await firestore.collection("whatsappOrders").add(orderData);
-
-    console.log("Order saved successfully with ID:", docRef.id);
-
-    // Now save the order to the external API
-   // await axios.post(
-   //   `https://ikanisamessaging.onrender.com/api/save-order`,
-   //   {
-   //     orderId,
-   //     customerInfo,
-   //     items,
-   //   }
-   // );
-
-    console.log("Order successfully saved to the external API.");
+    console.log("Order successfully saved to the external API:", response.data);
 
     // Send the TIN request to the customer
     await sendWhatsAppMessage(phone, {
@@ -663,7 +647,6 @@ const handleLocation = async (location, phone) => {
     });
   }
 };
-
 
 //const handleLocation = async (location, phone) => {
 //  try {
@@ -1091,10 +1074,11 @@ app.post("/api/send-message", async (req, res) => {
   }
 });
 
+
 app.post("/api/save-order", async (req, res) => {
   console.log("Incoming order data:", req.body);
 
-  const { orderId, customerInfo, items } = req.body;
+  const { orderId, customerInfo, items, deliveryLocation } = req.body;
 
   try {
     // Validate incoming data
@@ -1121,17 +1105,12 @@ app.post("/api/save-order", async (req, res) => {
       };
     });
 
-    let currentOrder = 0; // Initialize an order counter
+    let currentOrder = 0;
 
     function orderNumber() {
-      // Increment the order counter
       currentOrder += 1;
-
-      // Get the current date and format it as 'yyyyMMdd'
       const now = new Date();
       const dateStr = now.toISOString().slice(0, 10).replace(/-/g, "");
-
-      // Format and return the order number
       return `ORD-${dateStr}-${currentOrder.toString().padStart(6, "0")}`;
     }
 
@@ -1153,6 +1132,7 @@ app.post("/api/save-order", async (req, res) => {
       served: false,
       accepted: false,
       vendor: `+250788767816`,
+      deliveryLocation: deliveryLocation || null // Add location data
     };
 
     // Save order to Firestore
@@ -1170,6 +1150,7 @@ app.post("/api/save-order", async (req, res) => {
       .json({ message: "An error occurred while saving the order" });
   }
 });
+
 
 async function fetchFacebookCatalogProducts() {
   const url = `https://graph.facebook.com/v12.0/545943538321713/products?fields=id,name,description,price,image_url,retailer_id`;
