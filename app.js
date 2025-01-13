@@ -870,6 +870,8 @@ async function sendDefaultCatalog(phone) {
               title: "Our Products",
               product_items: [
                 { product_retailer_id: "lxas8cc342" }, // two latest
+                { product_retailer_id: "wzz0yoorin" },
+                { product_retailer_id: "5bn8ew7t9v" },
                 { product_retailer_id: "fn92a2u1n0" },
                 { product_retailer_id: "4nv3b0a4je" },
                 { product_retailer_id: "f1i6w3reo3" },
@@ -880,6 +882,11 @@ async function sendDefaultCatalog(phone) {
                 { product_retailer_id: "okaifyloso" },
                 { product_retailer_id: "wzvz714ih8" },
                 { product_retailer_id: "uxeg0mzdv7" },
+                { product_retailer_id: "p8vhimsnat" },
+                { product_retailer_id: "6q0k2c823u" },
+                { product_retailer_id: "0ixo8tkei5" },
+                { product_retailer_id: "ycgvnxm07l" },
+                { product_retailer_id: "p76ydylhfa" },
                 { product_retailer_id: "qye71mwlt6" },
                 { product_retailer_id: "80g014ofpq" },
                 { product_retailer_id: "7ylsmqn0mg" },
@@ -889,7 +896,8 @@ async function sendDefaultCatalog(phone) {
                 { product_retailer_id: "08gro8egrt" }, // Heinken
                 { product_retailer_id: "boq0hoiq7a" }, // Turbo King
                 { product_retailer_id: "fqt5zp6z5k" }, // Legend
-                { product_retailer_id: "l4bflbemkw" }, // Mutzig 33 CL
+                { product_retailer_id: "l4bflbemkw" }, // Mutzig 33 CL 
+                { product_retailer_id: "njlmxlf1zp" },
                 { product_retailer_id: "k0bsesfzs8" }, // Mutzig 65 CL
                 { product_retailer_id: "td55lg0z7v" }, // Primus 50 CL
                 { product_retailer_id: "qqbhwrsty8" }, // Primus 70 CL
